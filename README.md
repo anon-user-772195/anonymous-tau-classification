@@ -7,7 +7,6 @@ This repository contains code for an anonymous machine learning submission.
 This project implements a machine learning pipeline for classification tasks related to neurodegenerative disease analysis. The repository includes data preprocessing, model training, and evaluation components.
 
 ## Setup
-
 1. Clone the repository:
 
 ```
