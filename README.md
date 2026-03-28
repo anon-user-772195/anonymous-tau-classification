@@ -1,40 +1,19 @@
 # Anonymous Submission
 
-This repository contains code for an anonymous machine learning submission.
+This repository contains code and supporting materials for an anonymous double-blind machine learning submission.
 
 ## Overview
 
-This project implements a machine learning pipeline for classification tasks related to neurodegenerative disease analysis. The repository includes data preprocessing, model training, and evaluation components.
+The repository is anonymized for peer review and includes project code and interface-related components used in the submission.
 
-## Setup
-1. Clone the repository:
+## Repository Structure
 
-```
-git clone <repo-url>
-cd anonymous-tau-classification
-```
-
-2. Install dependencies:
-
-```
-pip install -r requirements.txt
-```
-
-## Usage
-
-Run the main training script:
-
-```
-python train.py
-```
-
-## Structure
-
-* `UI design/` – frontend / interface components
-* `models/` – model definitions (if applicable)
-* `scripts/` – training and evaluation scripts (if applicable)
+* `UI design/` – interface and project-related files
+* `package-lock.json` – dependency lock file for the interface environment
+* `.gitignore` – excluded local and generated files
 
 ## Notes
 
-* This repository is anonymized for double-blind review.
+* This repository has been anonymized for double-blind review.
 * All identifying information has been removed.
+* Additional documentation and cleanup can be provided in the camera-ready version if the submission is accepted.
