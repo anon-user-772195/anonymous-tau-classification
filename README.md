@@ -6,7 +6,7 @@ NeuroFoldNet is a research-grade biomedical ML workflow for multi-class classifi
 - Dementia with Lewy Bodies (DLB)
 - Progressive Supranuclear Palsy (PSP)
 
-The original tau polymorph features are reconstructed from the Nature Communications Biology supplement `42003_2025_7499_MOESM3_ESM.xlsx`. This repository now also supports an exploratory Figure 7 / GSE277105 branch that derives sample-level transcriptomic features from scRNA-seq data.
+The original tau polymorph features are reconstructed from the Nature Communications Biology supplement `42003_2025_7499_MOESM3_ESM.xlsx`. This repository also supports Figure 7 / GSE277105 preprocessing that derives sample-level transcriptomic summaries from scRNA-seq data.
 
 ## Required Data
 
@@ -55,7 +55,7 @@ data/processed/tau_features.csv
 data/processed/tau_plus_figure7_features.csv
 ```
 
-If exact tau and GEO sample IDs do not match, the merge script does not invent one-to-one pairings. It creates disease-level GEO summary features and marks them with `geo_auxiliary_level=disease_mean`. This mode is for research exploration and manuscript hypothesis support, not deployable diagnostic inference.
+If exact tau and GEO sample IDs do not match, the merge script does not invent one-to-one pairings. It creates disease-level GEO summary features and marks them with `geo_auxiliary_level=disease_mean`. This mode is for exploratory analysis, not deployable diagnostic inference.
 
 By default, `train.py` ignores unmatched disease-level auxiliary summaries during model evaluation. This prevents disease-level summaries from acting like label encodings. To run an explicitly exploratory separability analysis with those columns, add `--allow_disease_level_aux`.
 
@@ -85,20 +85,20 @@ Run an explicitly exploratory disease-summary separability analysis:
 python train.py --feature_mode tau_full_supplement_plus_geo --classifier logreg_balanced --allow_disease_level_aux
 ```
 
-Run nested model selection for the optimized headline tau-polymorph classifier:
+Run nested model selection for the optimized tau-polymorph classifier:
 
 ```bash
 python scripts/nested_model_selection.py --feature-mode tau_full_supplement_plus_geo
 ```
 
-Run the targeted tau + one Figure 7 feature sensitivity model:
+Create and evaluate the tau model with one disease-blind Figure 7 context feature:
 
 ```bash
-python scripts/create_tau_plus_one_fig7_feature.py
-python scripts/nested_model_selection.py --feature-mode tau_plus_one_fig7 --output results/nested_model_selection_tau_plus_one_fig7_results.csv
+python scripts/create_tau_plus_one_fig7_nonleaking_feature.py
+python scripts/nested_model_selection.py --feature-mode tau_plus_one_fig7_nonleaking --output results/nested_model_selection_tau_plus_one_fig7_nonleaking_results.csv
 ```
 
-Current headline-ready optimized result:
+Current optimized result:
 
 ```text
 Accuracy: 95.0% +/- 11.2%
@@ -106,9 +106,7 @@ Macro-F1: 0.920 +/- 0.179
 Log loss: 0.318 +/- 0.169
 ```
 
-This result uses the Figure 1-7-informed workflow while excluding unmatched disease-level summary columns from the predictive model. The predictive features are the matched tau polymorph measurements.
-
-The targeted tau + one Figure 7 feature sensitivity model also achieved 95.0% accuracy and lowered mean log loss to 0.185. It includes `geo_module_tau_neuronal_vs_untreated` as one selected Figure 7-derived auxiliary feature while excluding the full unmatched GEO summary feature set.
+This result uses matched tau polymorph measurements. The optional one-feature Figure 7 context table uses `fig7_global_tau_neuronal_response`, a single disease-blind constant derived from treated Figure 7 profiles. It is included only as non-predictive context and does not assign disease-specific transcriptomic values to tau samples.
 
 Outputs:
 

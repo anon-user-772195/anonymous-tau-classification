@@ -26,7 +26,6 @@ PROJECT_ROOT = Path(__file__).resolve().parent
 RESULTS_DIR = PROJECT_ROOT / "results"
 TAU_FEATURES = PROJECT_ROOT / "data" / "processed" / "tau_features.csv"
 TAU_PLUS_GEO = PROJECT_ROOT / "data" / "processed" / "tau_plus_figure7_features.csv"
-TAU_PLUS_ONE_FIG7 = PROJECT_ROOT / "data" / "processed" / "tau_plus_one_fig7_feature.csv"
 TAU_PLUS_ONE_FIG7_NONLEAKING = PROJECT_ROOT / "data" / "processed" / "tau_plus_one_fig7_nonleaking_feature.csv"
 TAU_FULL_SUPPLEMENT = PROJECT_ROOT / "data" / "processed" / "tau_full_supplement_features.csv"
 TAU_FULL_SUPPLEMENT_PLUS_GEO = PROJECT_ROOT / "data" / "processed" / "tau_full_supplement_plus_geo_features.csv"
@@ -75,23 +74,6 @@ def load_training_table(feature_mode: str) -> pd.DataFrame:
             "WARNING: full supplement features are disease-level summaries from unmatched "
             "figure blocks. Treat this as exploratory feature augmentation, not matched-sample validation."
         )
-        return data
-
-    if feature_mode == "tau_plus_one_fig7":
-        if not TAU_PLUS_ONE_FIG7.exists():
-            raise FileNotFoundError(
-                f"Missing tau + one Fig 7 feature table: {TAU_PLUS_ONE_FIG7}\n"
-                "Run:\n"
-                "  python scripts/create_tau_plus_one_fig7_feature.py"
-            )
-        data = pd.read_csv(TAU_PLUS_ONE_FIG7)
-        print(f"Loaded tau + one Figure 7 auxiliary feature: {TAU_PLUS_ONE_FIG7}")
-        if "one_fig7_feature_name" in data.columns:
-            print(f"One Fig 7 feature: {data['one_fig7_feature_name'].iloc[0]}")
-            print(
-                "NOTE: this single Fig 7 feature is disease-level auxiliary information, "
-                "not tau-replicate-matched."
-            )
         return data
 
     if feature_mode == "tau_plus_one_fig7_nonleaking":
@@ -195,7 +177,7 @@ def feature_columns(
 
 
 def build_preprocessor(train_frame: pd.DataFrame, cols: list[str], feature_mode: str) -> ColumnTransformer:
-    if feature_mode in {"tau_only", "tau_full_supplement", "tau_plus_one_fig7", "tau_plus_one_fig7_nonleaking"}:
+    if feature_mode in {"tau_only", "tau_full_supplement", "tau_plus_one_fig7_nonleaking"}:
         return ColumnTransformer(
             transformers=[
                 (
@@ -419,7 +401,6 @@ def main() -> None:
         "--feature_mode",
         choices=[
             "tau_only",
-            "tau_plus_one_fig7",
             "tau_plus_one_fig7_nonleaking",
             "tau_plus_geo",
             "tau_full_supplement",

@@ -283,7 +283,7 @@ def evaluate_leave_block_out(table: pd.DataFrame, output_dir: Path) -> tuple[pd.
     return results, pred_frame
 
 
-def write_blurb(path: Path, results: pd.DataFrame, table: pd.DataFrame) -> None:
+def write_report(path: Path, results: pd.DataFrame, table: pd.DataFrame) -> None:
     best = results.iloc[0]
     path.parent.mkdir(parents=True, exist_ok=True)
     text = f"""Figure 1-7 Block-Level Classifier Result
@@ -291,10 +291,6 @@ def write_blurb(path: Path, results: pd.DataFrame, table: pd.DataFrame) -> None:
 An integrated Figure 1-7 disease-program feature table was constructed by representing each AD, DLB, or PSP figure block as a compact quantitative profile. Figure 1-6 blocks used disease-specific supplement measurements, and Figure 7 used pseudobulk scRNA-seq response profiles summarized by genotype and disease condition. The evaluation unit was a figure-derived disease-program block, not an individual patient, brain, tau replicate, or cell.
 
 Using leave-one-block-out evaluation across {table['block_id'].nunique()} figure/program blocks ({len(table)} disease-block profiles), the best block-level classifier was {best['model']} with select_k={best['select_k']}. This model achieved {best['accuracy_mean']:.1%} mean accuracy, {best['macro_f1_mean']:.3f} macro-F1, and {best['log_loss_mean']:.3f} log loss.
-
-Recommended wording:
-
-Across integrated Figure 1-7 disease-program profiles, a block-level NeuroFoldNet analysis classified AD, DLB, and PSP-associated tau oligomer programs with {best['accuracy_mean']:.1%} leave-one-block-out accuracy. This result supports disease-specific biological separability across morphology, biochemical, functional, electrophysiological, and transcriptomic response measurements, while remaining distinct from patient-level or cell-level diagnostic validation.
 """
     path.write_text(text, encoding="utf-8")
 
@@ -318,18 +314,18 @@ def main() -> None:
     )
     parser.add_argument("--results-dir", type=Path, default=PROJECT_ROOT / "results")
     parser.add_argument(
-        "--blurb-output",
+        "--report-output",
         type=Path,
-        default=PROJECT_ROOT / "manuscript" / "figure1_7_block_classifier_results_blurb.txt",
+        default=PROJECT_ROOT / "results" / "figure1_7_block_classifier_report.txt",
     )
     args = parser.parse_args()
 
     table = build_block_table(args.supplement_features, args.geo_features, args.block_table_output)
     results, _ = evaluate_leave_block_out(table, args.results_dir)
-    write_blurb(args.blurb_output, results, table)
+    write_report(args.report_output, results, table)
     print("Saved block-level classifier results.")
     print(results.to_string(index=False))
-    print(f"Saved manuscript blurb: {args.blurb_output}")
+    print(f"Saved block-level classifier report: {args.report_output}")
 
 
 if __name__ == "__main__":

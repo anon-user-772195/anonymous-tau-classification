@@ -196,7 +196,7 @@ def main() -> None:
     )
     parser.add_argument("--out-dir", default="results")
     parser.add_argument(
-        "--note", default="manuscript/figure7_replicate_audit_note.txt"
+        "--note", default="results/figure7_replicate_audit_note.txt"
     )
     args = parser.parse_args()
 
