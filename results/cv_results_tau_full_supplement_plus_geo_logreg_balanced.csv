@@ -1,0 +1,6 @@
+feature_mode,classifier,select_k,fold,n_train,n_validation,accuracy,macro_f1,log_loss
+tau_full_supplement_plus_geo,logreg_balanced,none,1,14,4,1.0,1.0,0.006014822222407264
+tau_full_supplement_plus_geo,logreg_balanced,none,2,14,4,1.0,1.0,0.005629938097400771
+tau_full_supplement_plus_geo,logreg_balanced,none,3,14,4,1.0,1.0,0.005595206211917338
+tau_full_supplement_plus_geo,logreg_balanced,none,4,15,3,1.0,1.0,0.004920797594038454
+tau_full_supplement_plus_geo,logreg_balanced,none,5,15,3,1.0,1.0,0.005107755952834854

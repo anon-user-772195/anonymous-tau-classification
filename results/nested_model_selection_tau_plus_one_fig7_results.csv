@@ -1,0 +1,6 @@
+feature_mode,fold,selected_classifier,selected_k,inner_macro_f1,outer_accuracy,outer_macro_f1,outer_log_loss
+tau_plus_one_fig7,1,logreg_balanced,8,1.0,0.75,0.6,0.40597157643742565
+tau_plus_one_fig7,2,logreg_balanced,5,1.0,1.0,1.0,0.1408329425100723
+tau_plus_one_fig7,3,logreg_balanced,5,1.0,1.0,1.0,0.13748605155177043
+tau_plus_one_fig7,4,rf_balanced,2,1.0,1.0,1.0,0.06806428112592038
+tau_plus_one_fig7,5,logreg_balanced,3,1.0,1.0,1.0,0.17190516164785943

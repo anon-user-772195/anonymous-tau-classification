@@ -1,0 +1,9 @@
+Figure 1-7 Block-Level Classifier Result
+
+An integrated Figure 1-7 disease-program feature table was constructed by representing each AD, DLB, or PSP figure block as a compact quantitative profile. Figure 1-6 blocks used disease-specific supplement measurements, and Figure 7 used pseudobulk scRNA-seq response profiles summarized by genotype and disease condition. The evaluation unit was a figure-derived disease-program block, not an individual patient, brain, tau replicate, or cell.
+
+Using leave-one-block-out evaluation across 11 figure/program blocks (33 disease-block profiles), the best block-level classifier was logreg with select_k=8. This model achieved 66.7% mean accuracy, 0.626 macro-F1, and 0.917 log loss.
+
+Recommended wording:
+
+Across integrated Figure 1-7 disease-program profiles, a block-level NeuroFoldNet analysis classified AD, DLB, and PSP-associated tau oligomer programs with 66.7% leave-one-block-out accuracy. This result supports disease-specific biological separability across morphology, biochemical, functional, electrophysiological, and transcriptomic response measurements, while remaining distinct from patient-level or cell-level diagnostic validation.

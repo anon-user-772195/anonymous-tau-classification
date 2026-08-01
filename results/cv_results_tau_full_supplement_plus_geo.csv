@@ -1,0 +1,6 @@
+feature_mode,classifier,select_k,fold,n_train,n_validation,accuracy,macro_f1,log_loss
+tau_full_supplement_plus_geo,neurofoldnet,none,1,14,4,0.75,0.6,0.311155918263575
+tau_full_supplement_plus_geo,neurofoldnet,none,2,14,4,0.75,0.6,0.3042900578727642
+tau_full_supplement_plus_geo,neurofoldnet,none,3,14,4,0.75,0.6,0.31057318083697194
+tau_full_supplement_plus_geo,neurofoldnet,none,4,15,3,0.6666666666666666,0.5555555555555555,0.37989184963038264
+tau_full_supplement_plus_geo,neurofoldnet,none,5,15,3,0.6666666666666666,0.5555555555555555,0.38256853978540556

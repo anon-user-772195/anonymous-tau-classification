@@ -1,0 +1,6 @@
+feature_mode,fold,selected_classifier,selected_k,inner_macro_f1,outer_accuracy,outer_macro_f1,outer_log_loss
+tau_plus_one_fig7_nonleaking,1,logreg_balanced,none,1.0,0.75,0.6,0.6061617751090728
+tau_plus_one_fig7_nonleaking,2,logreg_balanced,2,1.0,1.0,1.0,0.28675884064158286
+tau_plus_one_fig7_nonleaking,3,logreg_balanced,5,1.0,1.0,1.0,0.162901700478822
+tau_plus_one_fig7_nonleaking,4,svc_rbf_balanced,3,1.0,1.0,1.0,0.28688862452545527
+tau_plus_one_fig7_nonleaking,5,logreg_balanced,3,1.0,1.0,1.0,0.24756914033530522

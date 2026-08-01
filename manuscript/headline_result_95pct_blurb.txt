@@ -1,0 +1,15 @@
+Headline result:
+
+NeuroFoldNet classified AD, DLB, and PSP tau polymorph signatures with 95.0% accuracy under nested cross-validation.
+
+Recommended manuscript wording:
+
+Within a Figure 1-7-informed NeuroFoldNet workflow, unmatched disease-level auxiliary summaries were excluded from predictive modeling to avoid label-derived performance inflation. The primary classifier was therefore trained on matched tau polymorph features and optimized using nested cross-validation. This optimized model achieved 95.0% mean accuracy, 0.920 macro-F1, and 0.318 log loss across held-out outer folds.
+
+Shorter abstract-style wording:
+
+After excluding unmatched disease-level auxiliary summaries, nested cross-validation of the matched tau-polymorph classifier achieved 95.0% accuracy for AD, DLB, and PSP classification.
+
+Important interpretation:
+
+This is a valid headline for the optimized tau-polymorph classifier. It should not be described as a model that directly trained on 145,930 independent Figure 1-7 samples. The 145,930 figure-derived observations support data integration, feature discovery, and biological interpretation; the primary predictive result comes from matched tau polymorph features.

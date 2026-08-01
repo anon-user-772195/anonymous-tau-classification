@@ -1,0 +1,40 @@
+Full Supplement Feature Expansion
+
+Input source:
+- data/raw/42003_2025_7499_MOESM3_ESM.xlsx
+- data/figure7_geo/GSE277105_counts.csv.gz
+- data/figure7_geo/GSE277105_metadata.csv.gz
+
+Numeric points available in the supplement/GEO branch:
+- Fig 1: 10,871 numeric values
+- Fig 2: 58,980 numeric values
+- Fig 3: 36 numeric values
+- Fig 4: 120 numeric values
+- Fig 5: 991 numeric values
+- Fig 6: 1,302 numeric values
+- Fig 7 / GSE277105: 73,630 cells
+
+Implementation:
+- scripts/prepare_full_supplement_features.py summarizes disease-specific numeric blocks from Fig 1 through Fig 6.
+- scripts/prepare_figure7_geo_features.py aggregates Figure 7 cells to sample/treatment-level pseudobulk profiles.
+- scripts/merge_tau_and_geo_features.py can join either the original tau table or the expanded full-supplement table with GEO summaries.
+- train.py supports tau_full_supplement and tau_full_supplement_plus_geo feature modes.
+
+Output tables:
+- data/processed/full_supplement_disease_features.csv: 3 rows x 118 columns
+- data/processed/tau_full_supplement_features.csv: 18 rows x 130 columns
+- data/processed/tau_full_supplement_plus_geo_features.csv: 18 rows x 249 columns
+
+Primary NeuroFoldNet CV results:
+- tau_only: accuracy 0.7167 +/- 0.0456; macro-F1 0.5822 +/- 0.0243; log loss 0.3377 +/- 0.0398
+- tau_plus_geo: accuracy 0.6667 +/- 0.1021; macro-F1 0.5067 +/- 0.1606; log loss 0.3728 +/- 0.0782
+- tau_full_supplement: accuracy 0.7333 +/- 0.1807; macro-F1 0.5956 +/- 0.2760; log loss 0.3206 +/- 0.1368
+- tau_full_supplement_plus_geo: accuracy 0.7167 +/- 0.0456; macro-F1 0.5822 +/- 0.0243; log loss 0.3367 +/- 0.0359
+
+Exploratory model search:
+- results/expanded_model_search.csv stores fold-local classifier comparisons.
+- Several simple classifiers reach 100% accuracy when using disease-level full-supplement summaries.
+- This is not appropriate as the main performance claim because the added full-supplement and GEO features are disease-level auxiliary descriptors, not matched sample-level measurements.
+
+Interpretation:
+The expanded features strengthen biological characterization and can be described as a full-supplement exploratory feature expansion. The defensible primary claim should remain tied to the grouped NeuroFoldNet CV results and should clearly state that full-supplement/GEO additions are disease-level auxiliary summaries.
