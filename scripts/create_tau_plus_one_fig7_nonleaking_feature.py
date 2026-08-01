@@ -1,10 +1,4 @@
-"""Create a tau feature table with one non-leaking Figure 7 context feature.
-
-Unlike disease-level GEO joins, this feature is computed once across all
-treated Figure 7 profiles and assigned identically to every tau feature vector.
-It is therefore available without knowing a sample's disease label. It is a
-Figure 7 context feature, not a matched transcriptomic measurement.
-"""
+"""Create a tau feature table with one global Figure 7 descriptor."""
 
 from __future__ import annotations
 
@@ -45,14 +39,14 @@ def main() -> None:
     merged[OUTPUT_COLUMN] = global_value
     merged["fig7_context_feature_name"] = args.geo_feature
     merged["fig7_context_level"] = "global_treated_profile_mean"
-    merged["fig7_context_note"] = "non-leaking disease-blind Figure 7 context feature"
+    merged["fig7_context_note"] = "global treated Figure 7 profile mean"
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
     merged.to_csv(args.output, index=False)
-    print(f"Saved tau + non-leaking one Fig 7 feature table: {args.output}")
+    print(f"Saved tau + one Figure 7 descriptor table: {args.output}")
     print(f"Shape: {merged.shape}")
     print(f"{OUTPUT_COLUMN} = {global_value:.12f}")
-    print("This value is identical for all rows and was computed without using disease labels.")
+    print("Descriptor value is identical for all rows.")
 
 
 if __name__ == "__main__":
