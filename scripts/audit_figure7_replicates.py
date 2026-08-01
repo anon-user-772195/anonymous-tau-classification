@@ -1,9 +1,4 @@
-"""Audit Figure 7 / GSE277105 metadata for biological replicate identifiers.
 
-This script checks whether the downloaded scRNA-seq files contain mouse, brain,
-donor, replicate, or library identifiers that would support brain-held-out
-cell-level evaluation. It does not train a model.
-"""
 
 from __future__ import annotations
 

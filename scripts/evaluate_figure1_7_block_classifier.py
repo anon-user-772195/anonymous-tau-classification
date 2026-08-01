@@ -1,10 +1,4 @@
-"""Evaluate a Figure 1-7 disease-program block classifier.
 
-This analysis makes Figure 7 part of a separate block-level accuracy number.
-Each row is a disease-specific figure/program block, not an individual patient,
-brain, cell, or tau replicate. Evaluation holds out entire blocks so the model
-is tested on unseen measurement programs.
-"""
 
 from __future__ import annotations
 

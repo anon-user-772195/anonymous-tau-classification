@@ -64,20 +64,13 @@ def _add_block_features(features: dict[str, dict[str, float]], df: pd.DataFrame,
 
 
 def load_full_supplement_disease_features(path: str | Path | None = None) -> pd.DataFrame:
-    """
-    Summarize all disease-specific numeric values available in the supplement.
 
-    These are disease-level descriptors, not independent sample rows. They are
-    useful for exploratory feature augmentation but should not be framed as
-    matched-sample multimodal data.
-    """
     workbook = find_tau_workbook(path)
     print(f"Loading full supplement numeric features from: {workbook}")
     features: dict[str, dict[str, float | str]] = {
         disease: {"disease": disease} for disease in DISEASES
     }
 
-    # Fig 1: AFM distributions, replicated values, and Fig 1G traces.
     fig1 = pd.read_excel(workbook, sheet_name="Fig 1", header=None)
     _add_block_features(
         features,
@@ -93,7 +86,6 @@ def load_full_supplement_disease_features(path: str | Path | None = None) -> pd.
     _add_named_distribution(features, fig1, "fig1_area_distribution", {"AD": [2, 3], "DLB": [9, 10], "PSP": [16, 17]})
     _add_named_distribution(features, fig1, "fig1_diameter_distribution", {"AD": [4, 5], "DLB": [11, 12], "PSP": [18, 19]})
 
-    # Fig 2: ThT spectra. Column ranges are explicitly labeled in row 2.
     fig2 = pd.read_excel(workbook, sheet_name="Fig 2", header=None)
     _add_block_features(
         features,
@@ -106,11 +98,9 @@ def load_full_supplement_disease_features(path: str | Path | None = None) -> pd.
         },
     )
 
-    # Fig 3: proteolytic resistance timecourse blocks.
     fig3 = pd.read_excel(workbook, sheet_name="Fig 3", header=None)
     _add_block_features(features, fig3, "fig3_proteolysis", {"AD": [0, 1, 2], "DLB": [4, 5, 6], "PSP": [8, 9, 10]})
 
-    # Fig 4: antibody/seeding matrix. A beta oligomer controls are excluded.
     fig4 = pd.read_excel(workbook, sheet_name="Fig 4", header=None)
     _add_block_features(
         features,
@@ -123,7 +113,6 @@ def load_full_supplement_disease_features(path: str | Path | None = None) -> pd.
         },
     )
 
-    # Fig 5: toxicity/transition assays, split by disease columns across subpanels.
     fig5 = pd.read_excel(workbook, sheet_name="Fig 5", header=None)
     _add_block_features(
         features,
@@ -136,7 +125,6 @@ def load_full_supplement_disease_features(path: str | Path | None = None) -> pd.
         },
     )
 
-    # Fig 6: electrophysiology traces and bar values. Vehicle/CTRL/n columns are excluded.
     fig6 = pd.read_excel(workbook, sheet_name="Fig 6", header=None)
     _add_block_features(
         features,

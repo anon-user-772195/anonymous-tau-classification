@@ -140,9 +140,6 @@ def feature_columns(
 ) -> list[str]:
     blocked = set(META_COLUMNS)
     if "geo" in feature_mode:
-        # These PCA columns are computed globally by the GEO preparation script for inspection.
-        # Fold-local PCA is recomputed below from geo_expr_* columns to avoid using validation
-        # samples in dimensionality reduction.
         blocked.update(c for c in data.columns if c.startswith("geo_pca_global_"))
         if (
             not allow_disease_level_aux

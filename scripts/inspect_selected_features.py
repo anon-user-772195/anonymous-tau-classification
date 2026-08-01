@@ -1,4 +1,4 @@
-"""Inspect fold-local selected features for a trained configuration."""
+
 
 from __future__ import annotations
 

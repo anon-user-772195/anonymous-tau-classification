@@ -1,9 +1,4 @@
-"""Nested leakage-safe model selection.
 
-Outer folds estimate performance. Inner folds select classifier/top-k settings.
-Disease-level Figure 1-7 auxiliary summaries are ignored unless explicitly
-enabled, matching train.py defaults.
-"""
 
 from __future__ import annotations
 

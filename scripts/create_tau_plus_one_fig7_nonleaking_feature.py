@@ -1,4 +1,4 @@
-"""Create a tau feature table with one global Figure 7 descriptor."""
+
 
 from __future__ import annotations
 

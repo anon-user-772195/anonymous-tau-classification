@@ -1,9 +1,4 @@
-"""Leakage-safe model search for NeuroFoldNet feature tables.
 
-The search uses the same StratifiedGroupKFold protocol as train.py. Constant
-feature removal and optional univariate feature selection are fit inside each
-training fold only.
-"""
 
 from __future__ import annotations
 

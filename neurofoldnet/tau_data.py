@@ -10,7 +10,7 @@ DEFAULT_TAU_XLSX = Path("data/raw/42003_2025_7499_MOESM3_ESM.xlsx")
 
 
 def find_tau_workbook(path: str | Path | None = None) -> Path:
-    """Find the Nature supplement workbook used by the original notebook."""
+
     candidates: list[Path] = []
     if path:
         candidates.append(Path(path))
@@ -35,13 +35,7 @@ def find_tau_workbook(path: str | Path | None = None) -> Path:
 
 
 def load_tau_feature_table(path: str | Path | None = None) -> pd.DataFrame:
-    """
-    Reconstruct the original tau polymorph feature table from the notebook.
 
-    The workbook parsing mirrors flask_backend/Classification_Complete_Pipeline.ipynb:
-    Fig 1 morphology, Fig 3 proteolytic resistance, Fig 4 seeding density,
-    and Fig 5 electrophysiology are outer-merged by disease and replicate index.
-    """
     workbook = find_tau_workbook(path)
     print(f"Loading tau polymorph workbook: {workbook}")
 

@@ -10,12 +10,7 @@ from sklearn.svm import SVC
 
 
 class NeuroFoldNet(BaseEstimator, ClassifierMixin):
-    """
-    Triple-layer stacking ensemble used by the existing NeuroFoldNet workflow.
 
-    Scaling and stacked out-of-fold predictions are fit inside estimator.fit(),
-    so cross-validation wrappers keep preprocessing restricted to training folds.
-    """
 
     def __init__(self, n_folds: int = 5, random_state: int = 42):
         self.n_folds = n_folds
