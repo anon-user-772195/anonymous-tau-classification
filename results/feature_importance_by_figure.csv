@@ -1,8 +1,5 @@
-experimental_figure,mean_permutation_importance,included_features
-Fig 1,0.12722222222222224,"height, area, diameter"
-Fig 2,0.0,none
-Fig 3,0.0,"proteo_resist_05, proteo_resist_1"
-Fig 4,0.0,seed_density
-Fig 5,0.036166666666666666,"basal_trans, induced_trans"
-Fig 6,0.0,none
-Fig 7,0.0,fig7_global_tau_neuronal_response
+experimental_figure,importance_score,relative_importance_percent,included_features
+FIG5,52.4702494265315,9.318160579211664,"basal_trans, induced_trans"
+FIG4,0.07589692789471066,0.013478490560293741,seed_density
+FIG3,4.067323515433689,0.722313578811591,"proteo_resist_05, proteo_resist_1"
+FIG1,506.48317329799795,89.94604735141645,"height, area, diameter"

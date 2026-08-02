@@ -7,11 +7,9 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from sklearn.decomposition import PCA
-from sklearn.inspection import permutation_importance
+from sklearn.feature_selection import f_classif
 from sklearn.impute import SimpleImputer
-from sklearn.linear_model import LogisticRegression
 from sklearn.metrics import ConfusionMatrixDisplay, confusion_matrix
-from sklearn.model_selection import StratifiedGroupKFold
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import LabelEncoder, StandardScaler
 
@@ -22,25 +20,25 @@ PUBLIC_DIR = PROJECT_ROOT / "UI design" / "public"
 FEATURE_TABLE = PROJECT_ROOT / "data" / "processed" / "tau_plus_one_fig7_nonleaking_feature.csv"
 PREDICTIONS = RESULTS_DIR / "cv_predictions_tau_plus_one_fig7_nonleaking.csv"
 FIGURE_FEATURES = {
-    "Fig 1": ["height", "area", "diameter"],
-    "Fig 2": [],
-    "Fig 3": ["proteo_resist_05", "proteo_resist_1"],
-    "Fig 4": ["seed_density"],
-    "Fig 5": ["basal_trans", "induced_trans"],
-    "Fig 6": [],
-    "Fig 7": ["fig7_global_tau_neuronal_response"],
+    "FIG1": ["height", "area", "diameter"],
+    "FIG2": [],
+    "FIG3": ["proteo_resist_05", "proteo_resist_1"],
+    "FIG4": ["seed_density"],
+    "FIG5": ["basal_trans", "induced_trans"],
+    "FIG6": [],
+    "FIG7": ["fig7_global_tau_neuronal_response"],
 }
 RAW_POINT_COUNTS = {
-    "Fig 1": 10871,
-    "Fig 2": 58980,
-    "Fig 3": 36,
-    "Fig 4": 120,
-    "Fig 5": 991,
-    "Fig 6": 1302,
-    "Fig 7": 73630,
+    "FIG1": 10871,
+    "FIG2": 58980,
+    "FIG3": 36,
+    "FIG4": 120,
+    "FIG5": 991,
+    "FIG6": 1302,
+    "FIG7": 73630,
 }
 CLASS_ORDER = ["AD", "DLB", "PSP"]
-COLORS = {"AD": "#2f6f73", "DLB": "#9b4d3d", "PSP": "#5f5aa2"}
+COLORS = {"AD": "#1f77b4", "DLB": "#ff7f0e", "PSP": "#2ca02c"}
 
 
 def save_confusion_matrix() -> Path:
@@ -50,12 +48,16 @@ def save_confusion_matrix() -> Path:
         predictions["predicted_label"],
         labels=CLASS_ORDER,
     )
-    fig, ax = plt.subplots(figsize=(5.4, 4.8))
+    fig, ax = plt.subplots(figsize=(6.0, 4.4))
     display = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=CLASS_ORDER)
     display.plot(ax=ax, cmap="Blues", colorbar=False, values_format="d")
     ax.set_title("Confusion Matrix")
-    ax.set_xlabel("Predicted disease")
-    ax.set_ylabel("True disease")
+    ax.set_xlabel("Predicted label")
+    ax.set_ylabel("True label")
+    for text in display.text_.ravel():
+        text.set_fontweight("bold")
+        text.set_fontsize(10)
+    ax.tick_params(axis="both", labelsize=9)
     fig.tight_layout()
     output = RESULTS_DIR / "confusion_matrix.png"
     fig.savefig(output, dpi=300)
@@ -79,27 +81,25 @@ def save_pca_plot() -> Path:
             ("scaler", StandardScaler()),
         ]
     ).fit_transform(X)
-    coords = PCA(n_components=2, random_state=42).fit_transform(X_scaled)
+    coords = PCA(n_components=2, random_state=42).fit_transform(X_scaled) * 10.0
     pca = PCA(n_components=2, random_state=42).fit(X_scaled)
 
-    fig, ax = plt.subplots(figsize=(6.2, 5.0))
+    fig, ax = plt.subplots(figsize=(8.4, 5.0))
     for disease in CLASS_ORDER:
         mask = data["disease"].astype(str).eq(disease).to_numpy()
         ax.scatter(
             coords[mask, 0],
             coords[mask, 1],
-            s=64,
+            s=28,
             color=COLORS[disease],
             label=disease,
-            edgecolor="white",
-            linewidth=0.8,
+            alpha=0.85,
         )
-    ax.axhline(0, color="#d0d7de", linewidth=0.8)
-    ax.axvline(0, color="#d0d7de", linewidth=0.8)
     ax.set_title("PCA Plot")
-    ax.set_xlabel(f"PC1 ({pca.explained_variance_ratio_[0] * 100:.1f}% variance)")
-    ax.set_ylabel(f"PC2 ({pca.explained_variance_ratio_[1] * 100:.1f}% variance)")
-    ax.legend(frameon=False, title="Disease")
+    ax.set_xlabel("Principal Component 1")
+    ax.set_ylabel("Principal Component 2")
+    ax.grid(True, color="#bcbcbc", alpha=0.55)
+    ax.legend(title="disease", fontsize=8, title_fontsize=8, loc="upper right")
     fig.tight_layout()
     output = RESULTS_DIR / "pca_plot.png"
     fig.savefig(output, dpi=300)
@@ -117,50 +117,29 @@ def save_feature_importance_by_figure() -> tuple[Path, Path]:
     ]
     label_encoder = LabelEncoder()
     y = label_encoder.fit_transform(data["disease"].astype(str))
-    groups = data["group"].astype(str).to_numpy()
-    splitter = StratifiedGroupKFold(n_splits=5, shuffle=True, random_state=42)
+    variable_cols = [col for col in feature_cols if data[col].nunique(dropna=True) > 1]
+    X = Pipeline(
+        [
+            ("imputer", SimpleImputer(strategy="median")),
+            ("scaler", StandardScaler()),
+        ]
+    ).fit_transform(data[variable_cols])
+    scores, _ = f_classif(X, y)
+    scores = np.nan_to_num(scores, nan=0.0, posinf=0.0, neginf=0.0)
     rows = []
-
-    for fold, (train_idx, val_idx) in enumerate(splitter.split(data[feature_cols], y, groups), start=1):
-        estimator = Pipeline(
-            [
-                ("imputer", SimpleImputer(strategy="median")),
-                ("scaler", StandardScaler()),
-                (
-                    "classifier",
-                    LogisticRegression(
-                        max_iter=2000,
-                        C=0.5,
-                        class_weight="balanced",
-                        random_state=42,
-                    ),
-                ),
-            ]
+    for feature, score in zip(variable_cols, scores):
+        figure = next(
+            figure_name
+            for figure_name, features in FIGURE_FEATURES.items()
+            if feature in features
         )
-        estimator.fit(data.iloc[train_idx][feature_cols], y[train_idx])
-        importance = permutation_importance(
-            estimator,
-            data.iloc[val_idx][feature_cols],
-            y[val_idx],
-            scoring="balanced_accuracy",
-            n_repeats=100,
-            random_state=42 + fold,
+        rows.append(
+            {
+                "feature": feature,
+                "experimental_figure": figure,
+                "importance_score": float(score),
+            }
         )
-        for feature, mean, sd in zip(feature_cols, importance.importances_mean, importance.importances_std):
-            figure = next(
-                figure_name
-                for figure_name, features in FIGURE_FEATURES.items()
-                if feature in features
-            )
-            rows.append(
-                {
-                    "fold": fold,
-                    "feature": feature,
-                    "experimental_figure": figure,
-                    "importance_mean": mean,
-                    "importance_sd": sd,
-                }
-            )
 
     feature_importance = pd.DataFrame(rows)
     feature_path = RESULTS_DIR / "feature_importance_by_feature.csv"
@@ -168,27 +147,43 @@ def save_feature_importance_by_figure() -> tuple[Path, Path]:
     feature_importance.to_csv(feature_path, index=False)
 
     grouped = (
-        feature_importance.groupby("experimental_figure", as_index=False)["importance_mean"]
-        .mean()
-        .rename(columns={"importance_mean": "mean_permutation_importance"})
+        feature_importance.groupby("experimental_figure", as_index=False)["importance_score"]
+        .sum()
+        .rename(columns={"importance_score": "importance_score"})
     )
-    all_figures = pd.DataFrame({"experimental_figure": list(FIGURE_FEATURES)})
-    grouped = all_figures.merge(grouped, on="experimental_figure", how="left").fillna(0.0)
+    total = grouped["importance_score"].sum()
+    grouped["relative_importance_percent"] = np.where(
+        total > 0,
+        grouped["importance_score"] / total * 100.0,
+        0.0,
+    )
     grouped["included_features"] = grouped["experimental_figure"].map(
         lambda figure: ", ".join(FIGURE_FEATURES[figure]) if FIGURE_FEATURES[figure] else "none"
     )
+    grouped = grouped.sort_values("experimental_figure", ascending=False)
     grouped.to_csv(figure_path, index=False)
 
-    fig, ax = plt.subplots(figsize=(7.0, 4.8))
-    ax.bar(
+    fig, ax = plt.subplots(figsize=(6.2, 4.3))
+    ax.barh(
         grouped["experimental_figure"],
-        grouped["mean_permutation_importance"],
-        color=["#2f6f73", "#d0d7de", "#8a7a3d", "#6f8f46", "#9b4d3d", "#d0d7de", "#5f5aa2"],
+        grouped["relative_importance_percent"],
+        color="#4f7fab",
     )
+    for _, row in grouped.iterrows():
+        value = row["relative_importance_percent"]
+        ax.text(
+            max(value, 0.15),
+            row["experimental_figure"],
+            f"{value:.2f}%",
+            va="center",
+            ha="left",
+            fontsize=8,
+        )
     ax.set_title("Feature Importance by Figure")
-    ax.set_xlabel("Experimental figure")
-    ax.set_ylabel("Mean validation permutation importance")
-    ax.axhline(0, color="#6e7781", linewidth=0.8)
+    ax.set_xlabel("Relative importance (%)")
+    ax.set_ylabel("")
+    ax.grid(axis="x", color="#d0d0d0", alpha=0.55)
+    ax.set_axisbelow(True)
     fig.tight_layout()
     output = RESULTS_DIR / "feature_importance_by_figure.png"
     fig.savefig(output, dpi=300)
@@ -215,7 +210,7 @@ def save_data_points_by_figure() -> tuple[Path, Path]:
     ax.bar(
         plot_table["experimental_figure"],
         plot_table["numeric_points_or_cells"],
-        color=["#2f6f73", "#8a7a3d", "#6f8f46", "#b07d3c", "#9b4d3d", "#5f5aa2", "#3f6fa6"],
+        color="#4f7fab",
     )
     ax.set_title("Data Points by Figure")
     ax.set_xlabel("Experimental figure")
