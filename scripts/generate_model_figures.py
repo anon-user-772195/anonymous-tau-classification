@@ -28,15 +28,6 @@ FIGURE_FEATURES = {
     "FIG6": [],
     "FIG7": ["fig7_global_tau_neuronal_response"],
 }
-RAW_POINT_COUNTS = {
-    "FIG1": 10871,
-    "FIG2": 58980,
-    "FIG3": 36,
-    "FIG4": 120,
-    "FIG5": 991,
-    "FIG6": 1302,
-    "FIG7": 73630,
-}
 CLASS_ORDER = ["AD", "DLB", "PSP"]
 COLORS = {"AD": "#1f77b4", "DLB": "#ff7f0e", "PSP": "#2ca02c"}
 
@@ -191,52 +182,12 @@ def save_feature_importance_by_figure() -> tuple[Path, Path]:
     return output, figure_path
 
 
-def save_data_points_by_figure() -> tuple[Path, Path]:
-    table = pd.DataFrame(
-        [
-            {"experimental_figure": figure, "numeric_points_or_cells": count}
-            for figure, count in RAW_POINT_COUNTS.items()
-        ]
-    )
-    table.loc[len(table)] = {
-        "experimental_figure": "Total",
-        "numeric_points_or_cells": int(table["numeric_points_or_cells"].sum()),
-    }
-    csv_path = RESULTS_DIR / "data_points_by_figure.csv"
-    table.to_csv(csv_path, index=False)
-
-    plot_table = table[table["experimental_figure"].ne("Total")].copy()
-    fig, ax = plt.subplots(figsize=(7.0, 4.8))
-    ax.bar(
-        plot_table["experimental_figure"],
-        plot_table["numeric_points_or_cells"],
-        color="#4f7fab",
-    )
-    ax.set_title("Data Points by Figure")
-    ax.set_xlabel("Experimental figure")
-    ax.set_ylabel("Numeric points or cells")
-    ax.text(
-        0.98,
-        0.94,
-        f"Total = {int(table.iloc[-1]['numeric_points_or_cells']):,}",
-        transform=ax.transAxes,
-        ha="right",
-        va="top",
-    )
-    fig.tight_layout()
-    output = RESULTS_DIR / "data_points_by_figure.png"
-    fig.savefig(output, dpi=300)
-    plt.close(fig)
-    return output, csv_path
-
-
 def copy_to_public(paths: list[Path]) -> None:
     PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
     name_map = {
         "confusion_matrix.png": "confusion-matrix.png",
         "pca_plot.png": "pca-plot.png",
         "feature_importance_by_figure.png": "feature-importance-by-figure.png",
-        "data_points_by_figure.png": "data-points-by-figure.png",
     }
     for path in paths:
         shutil.copy2(path, PUBLIC_DIR / name_map[path.name])
@@ -251,15 +202,12 @@ def main() -> None:
     confusion_path = save_confusion_matrix()
     pca_path = save_pca_plot()
     importance_path, importance_csv = save_feature_importance_by_figure()
-    point_path, point_csv = save_data_points_by_figure()
-    copy_to_public([confusion_path, pca_path, importance_path, point_path])
+    copy_to_public([confusion_path, pca_path, importance_path])
 
     print(f"Saved confusion matrix: {confusion_path}")
     print(f"Saved PCA plot: {pca_path}")
     print(f"Saved feature importance plot: {importance_path}")
     print(f"Saved feature importance table: {importance_csv}")
-    print(f"Saved data point plot: {point_path}")
-    print(f"Saved data point table: {point_csv}")
     print(f"Copied images to: {PUBLIC_DIR}")
 
 
