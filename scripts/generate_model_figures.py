@@ -30,6 +30,15 @@ FIGURE_FEATURES = {
     "Fig 6": [],
     "Fig 7": ["fig7_global_tau_neuronal_response"],
 }
+RAW_POINT_COUNTS = {
+    "Fig 1": 10871,
+    "Fig 2": 58980,
+    "Fig 3": 36,
+    "Fig 4": 120,
+    "Fig 5": 991,
+    "Fig 6": 1302,
+    "Fig 7": 73630,
+}
 CLASS_ORDER = ["AD", "DLB", "PSP"]
 COLORS = {"AD": "#2f6f73", "DLB": "#9b4d3d", "PSP": "#5f5aa2"}
 
@@ -44,11 +53,11 @@ def save_confusion_matrix() -> Path:
     fig, ax = plt.subplots(figsize=(5.4, 4.8))
     display = ConfusionMatrixDisplay(confusion_matrix=cm, display_labels=CLASS_ORDER)
     display.plot(ax=ax, cmap="Blues", colorbar=False, values_format="d")
-    ax.set_title("Corrected Real-Data CV Confusion Matrix")
+    ax.set_title("Confusion Matrix")
     ax.set_xlabel("Predicted disease")
     ax.set_ylabel("True disease")
     fig.tight_layout()
-    output = RESULTS_DIR / "confusion_matrix_corrected_real_cv.png"
+    output = RESULTS_DIR / "confusion_matrix.png"
     fig.savefig(output, dpi=300)
     plt.close(fig)
     return output
@@ -87,12 +96,12 @@ def save_pca_plot() -> Path:
         )
     ax.axhline(0, color="#d0d7de", linewidth=0.8)
     ax.axvline(0, color="#d0d7de", linewidth=0.8)
-    ax.set_title("PCA of Corrected Tau-Polymorph Feature Vectors")
+    ax.set_title("PCA Plot")
     ax.set_xlabel(f"PC1 ({pca.explained_variance_ratio_[0] * 100:.1f}% variance)")
     ax.set_ylabel(f"PC2 ({pca.explained_variance_ratio_[1] * 100:.1f}% variance)")
     ax.legend(frameon=False, title="Disease")
     fig.tight_layout()
-    output = RESULTS_DIR / "pca_corrected_tau_feature_vectors.png"
+    output = RESULTS_DIR / "pca_plot.png"
     fig.savefig(output, dpi=300)
     plt.close(fig)
     return output
@@ -154,8 +163,8 @@ def save_feature_importance_by_figure() -> tuple[Path, Path]:
             )
 
     feature_importance = pd.DataFrame(rows)
-    feature_path = RESULTS_DIR / "feature_importance_corrected_by_feature.csv"
-    figure_path = RESULTS_DIR / "feature_importance_corrected_by_experimental_figure.csv"
+    feature_path = RESULTS_DIR / "feature_importance_by_feature.csv"
+    figure_path = RESULTS_DIR / "feature_importance_by_figure.csv"
     feature_importance.to_csv(feature_path, index=False)
 
     grouped = (
@@ -176,23 +185,63 @@ def save_feature_importance_by_figure() -> tuple[Path, Path]:
         grouped["mean_permutation_importance"],
         color=["#2f6f73", "#d0d7de", "#8a7a3d", "#6f8f46", "#9b4d3d", "#d0d7de", "#5f5aa2"],
     )
-    ax.set_title("Feature Importance Aggregated by Experimental Figure")
+    ax.set_title("Feature Importance by Figure")
     ax.set_xlabel("Experimental figure")
     ax.set_ylabel("Mean validation permutation importance")
     ax.axhline(0, color="#6e7781", linewidth=0.8)
     fig.tight_layout()
-    output = RESULTS_DIR / "feature_importance_by_experimental_figure_corrected.png"
+    output = RESULTS_DIR / "feature_importance_by_figure.png"
     fig.savefig(output, dpi=300)
     plt.close(fig)
     return output, figure_path
 
 
+def save_data_points_by_figure() -> tuple[Path, Path]:
+    table = pd.DataFrame(
+        [
+            {"experimental_figure": figure, "numeric_points_or_cells": count}
+            for figure, count in RAW_POINT_COUNTS.items()
+        ]
+    )
+    table.loc[len(table)] = {
+        "experimental_figure": "Total",
+        "numeric_points_or_cells": int(table["numeric_points_or_cells"].sum()),
+    }
+    csv_path = RESULTS_DIR / "data_points_by_figure.csv"
+    table.to_csv(csv_path, index=False)
+
+    plot_table = table[table["experimental_figure"].ne("Total")].copy()
+    fig, ax = plt.subplots(figsize=(7.0, 4.8))
+    ax.bar(
+        plot_table["experimental_figure"],
+        plot_table["numeric_points_or_cells"],
+        color=["#2f6f73", "#8a7a3d", "#6f8f46", "#b07d3c", "#9b4d3d", "#5f5aa2", "#3f6fa6"],
+    )
+    ax.set_title("Data Points by Figure")
+    ax.set_xlabel("Experimental figure")
+    ax.set_ylabel("Numeric points or cells")
+    ax.text(
+        0.98,
+        0.94,
+        f"Total = {int(table.iloc[-1]['numeric_points_or_cells']):,}",
+        transform=ax.transAxes,
+        ha="right",
+        va="top",
+    )
+    fig.tight_layout()
+    output = RESULTS_DIR / "data_points_by_figure.png"
+    fig.savefig(output, dpi=300)
+    plt.close(fig)
+    return output, csv_path
+
+
 def copy_to_public(paths: list[Path]) -> None:
     PUBLIC_DIR.mkdir(parents=True, exist_ok=True)
     name_map = {
-        "confusion_matrix_corrected_real_cv.png": "confusion-matrix-corrected-real-cv.png",
-        "pca_corrected_tau_feature_vectors.png": "pca-corrected-tau-feature-vectors.png",
-        "feature_importance_by_experimental_figure_corrected.png": "feature-importance-by-experimental-figure-corrected.png",
+        "confusion_matrix.png": "confusion-matrix.png",
+        "pca_plot.png": "pca-plot.png",
+        "feature_importance_by_figure.png": "feature-importance-by-figure.png",
+        "data_points_by_figure.png": "data-points-by-figure.png",
     }
     for path in paths:
         shutil.copy2(path, PUBLIC_DIR / name_map[path.name])
@@ -207,12 +256,15 @@ def main() -> None:
     confusion_path = save_confusion_matrix()
     pca_path = save_pca_plot()
     importance_path, importance_csv = save_feature_importance_by_figure()
-    copy_to_public([confusion_path, pca_path, importance_path])
+    point_path, point_csv = save_data_points_by_figure()
+    copy_to_public([confusion_path, pca_path, importance_path, point_path])
 
     print(f"Saved confusion matrix: {confusion_path}")
     print(f"Saved PCA plot: {pca_path}")
     print(f"Saved feature importance plot: {importance_path}")
     print(f"Saved feature importance table: {importance_csv}")
+    print(f"Saved data point plot: {point_path}")
+    print(f"Saved data point table: {point_csv}")
     print(f"Copied images to: {PUBLIC_DIR}")
 
 
