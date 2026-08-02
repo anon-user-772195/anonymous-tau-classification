@@ -1,4 +1,4 @@
-﻿@tailwind base;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -45,7 +45,6 @@ main {
 }
 
 @media print {
-  * {
     print-color-adjust: exact;
   }
 

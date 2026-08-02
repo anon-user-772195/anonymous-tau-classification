@@ -542,7 +542,6 @@ function addField(figureId, key, label, unit, tooltip, values, min = 0, step = 0
   });
 }
 
-// Fig 1: AFM distributions + CD summary.
 addField(
   "fig1",
   "fig1_afm_height_mean",
@@ -644,7 +643,6 @@ addField(
   0.1
 );
 
-// Fig 2: fluorescence spectra peaks.
 const fig2Dyes = [
   { key: "ThT", label: "ThT" },
   { key: "Curcumin", label: "Curcumin" },
@@ -687,7 +685,6 @@ fig2Dyes.forEach((dye) => {
   );
 });
 
-// Fig 3: proteolysis timecourse.
 addField(
   "fig3",
   "fig3_pronase_0p5ug_1min",
@@ -761,7 +758,6 @@ addField(
   }
 );
 
-// Fig 4: antibody signals.
 const fig4Antibodies = ["TOMA 1", "TOMA2", "TOMA3", "TOMA4", "T22", "overall_mean"];
 fig4Antibodies.forEach((antibody) => {
   const key =
@@ -790,7 +786,6 @@ fig4Antibodies.forEach((antibody) => {
   );
 });
 
-// Fig 5: uptake counts.
 const fig5Fields = [
   { figKey: "fig5e", time: "12hr" },
   { figKey: "fig5e", time: "24hr" },
@@ -817,7 +812,6 @@ fig5Fields.forEach(({ figKey, time }) => {
   );
 });
 
-// Fig 6: electrophysiology summaries.
 addField(
   "fig6",
   "fig6_io_slope_0_100",

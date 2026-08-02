@@ -157,7 +157,6 @@ export function computeLogits(features: FeatureInput): Logits {
     }, 0);
   };
 
-  // Higher similarity -> higher logit (negative distance).
   const ad = -distanceFor("AD");
   const dlb = -distanceFor("DLB");
   const psp = -distanceFor("PSP");
