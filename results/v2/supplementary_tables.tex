@@ -321,3 +321,96 @@ Positive control & -- & MAPT$\to$C57 & 0.71 & 0.82 & -- \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\begin{table}[!htbp]
+\centering\scriptsize
+\caption{Fusion rules compared on identical held-out preparations (split-half protocol, 100 random splits; accuracy in \%, mean with 2.5--97.5\% range). The learned fusion is fitted on preparations from one half of the held-out measurements and evaluated on the other half.}\label{tab:s_rules}
+\begin{tabular}{llp{4.2cm}cccc}
+\toprule
+\textbf{Panel} & \textbf{$N$} & \textbf{Rule} & \textbf{Accuracy} & \textbf{Macro-AUC} & \textbf{Log loss} & \textbf{ECE} \\
+\midrule
+AFM + 4 dyes + seeding & 1 & Product rule (NeuroFoldNet) & 92.1 [77.8, 100.0] & 0.99 & 0.165 & 0.085 \\
+ &  & Sum rule & 89.7 [66.7, 100.0] & 0.98 & 0.824 & 0.464 \\
+ &  & Max rule & 77.6 [55.6, 100.0] & 0.92 & 0.850 & 0.363 \\
+ &  & Median rule & 79.8 [55.6, 100.0] & 0.93 & 0.909 & 0.404 \\
+ &  & Majority vote & 81.2 [55.6, 100.0] & 0.93 & 0.768 & 0.328 \\
+ &  & Learned fusion (stacked logistic regression) & 84.6 [66.7, 100.0] & 0.97 & 0.475 & 0.148 \\
+AFM + 4 dyes + seeding & 3 & Product rule (NeuroFoldNet) & 98.4 [88.9, 100.0] & 1.00 & 0.045 & 0.035 \\
+ &  & Sum rule & 94.8 [77.8, 100.0] & 0.99 & 0.819 & 0.515 \\
+ &  & Max rule & 80.4 [55.6, 100.0] & 0.94 & 0.798 & 0.365 \\
+ &  & Median rule & 91.0 [71.9, 100.0] & 0.98 & 0.935 & 0.514 \\
+ &  & Majority vote & 91.7 [77.8, 100.0] & 0.99 & 0.600 & 0.350 \\
+ &  & Learned fusion (stacked logistic regression) & 94.0 [77.8, 100.0] & 1.00 & 0.135 & 0.073 \\
+AFM + 4 dyes & 1 & Product rule (NeuroFoldNet) & 83.7 [78.4, 88.2] & 0.96 & 0.380 & 0.042 \\
+ &  & Sum rule & 82.7 [77.7, 87.5] & 0.94 & 0.902 & 0.410 \\
+ &  & Max rule & 73.5 [68.2, 80.2] & 0.89 & 0.926 & 0.320 \\
+ &  & Median rule & 70.7 [65.9, 76.4] & 0.87 & 0.960 & 0.305 \\
+ &  & Majority vote & 69.9 [64.3, 75.2] & 0.88 & 0.849 & 0.188 \\
+ &  & Learned fusion (stacked logistic regression) & 84.2 [79.1, 89.1] & 0.96 & 0.376 & 0.044 \\
+AFM + 4 dyes & 3 & Product rule (NeuroFoldNet) & 98.6 [95.1, 100.0] & 1.00 & 0.104 & 0.076 \\
+ &  & Sum rule & 97.4 [93.1, 100.0] & 1.00 & 0.896 & 0.564 \\
+ &  & Max rule & 91.3 [84.7, 97.2] & 0.98 & 0.873 & 0.490 \\
+ &  & Median rule & 87.2 [79.8, 93.1] & 0.97 & 0.966 & 0.488 \\
+ &  & Majority vote & 89.9 [83.3, 95.2] & 0.98 & 0.630 & 0.329 \\
+ &  & Learned fusion (stacked logistic regression) & 98.6 [95.8, 100.0] & 1.00 & 0.045 & 0.023 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!htbp]
+\centering\scriptsize
+\caption{Ablation of NeuroFoldNet fusion (AFM + 4 dyes + seeding): accuracy (\%) and accuracy drop (percentage points) when one source or one assay family is removed (100 draws).}\label{tab:s_ablation}
+\begin{tabular}{llcccc}
+\toprule
+\textbf{$N$} & \textbf{Removed} & \textbf{Accuracy} & \textbf{Drop} & \textbf{Macro-AUC} & \textbf{Log loss} \\
+\midrule
+1 & None (full panel) & 93.9 & +0.0 & 0.99 & 0.145 \\
+ & AFM height & 91.4 & +2.6 & 0.99 & 0.203 \\
+ & AFM area & 89.6 & +4.4 & 0.98 & 0.234 \\
+ & AFM diameter & 88.5 & +5.4 & 0.98 & 0.259 \\
+ & dye ThT & 94.8 & -0.8 & 0.99 & 0.135 \\
+ & dye Curcumin & 93.1 & +0.8 & 0.99 & 0.165 \\
+ & dye Bis-ANS & 93.6 & +0.4 & 0.99 & 0.156 \\
+ & dye FSB & 93.3 & +0.6 & 0.99 & 0.149 \\
+ & seeding & 83.9 & +10.0 & 0.96 & 0.377 \\
+ & Family: AFM morphology (all 3 measures) & 74.8 & +19.1 & 0.92 & 0.484 \\
+ & Family: Dye spectra (all 4 dyes) & 93.6 & +0.3 & 0.99 & 0.143 \\
+ & Family: Seeding & 84.2 & +9.8 & 0.96 & 0.371 \\
+3 & None (full panel) & 99.4 & +0.0 & 1.00 & 0.037 \\
+ & AFM height & 98.8 & +0.6 & 1.00 & 0.056 \\
+ & AFM area & 97.3 & +2.2 & 1.00 & 0.090 \\
+ & AFM diameter & 94.7 & +4.7 & 1.00 & 0.128 \\
+ & dye ThT & 99.3 & +0.2 & 1.00 & 0.040 \\
+ & dye Curcumin & 99.1 & +0.4 & 1.00 & 0.044 \\
+ & dye Bis-ANS & 99.2 & +0.3 & 1.00 & 0.042 \\
+ & dye FSB & 98.8 & +0.6 & 1.00 & 0.040 \\
+ & seeding & 98.6 & +0.8 & 1.00 & 0.107 \\
+ & Family: AFM morphology (all 3 measures) & 77.6 & +21.8 & 0.92 & 0.457 \\
+ & Family: Dye spectra (all 4 dyes) & 98.9 & +0.5 & 1.00 & 0.051 \\
+ & Family: Seeding & 98.8 & +0.7 & 1.00 & 0.103 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!htbp]
+\centering\scriptsize
+\caption{Calibration of the fused posterior and of each single expert (one measurement): accuracy, mean top-label confidence, expected calibration error (ECE, 10 bins) and Brier score.}\label{tab:s_calibration}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Setting} & \textbf{$N$} & \textbf{Accuracy} & \textbf{Mean confidence} & \textbf{ECE} & \textbf{Brier} \\
+\midrule
+AFM + 4 dyes + seeding & 1 & 0.93 & 0.94 & 0.014 & 0.102 \\
+AFM + 4 dyes + seeding & 3 & 0.99 & 0.97 & 0.024 & 0.018 \\
+AFM + 4 dyes & 1 & 0.84 & 0.83 & 0.007 & 0.227 \\
+AFM + 4 dyes & 3 & 0.99 & 0.91 & 0.074 & 0.042 \\
+Single expert: AFM height & 1 & 0.63 & 0.61 & 0.057 & 0.482 \\
+Single expert: AFM area & 1 & 0.52 & 0.58 & 0.068 & 0.536 \\
+Single expert: AFM diameter & 1 & 0.57 & 0.56 & 0.090 & 0.533 \\
+Single expert: dye ThT & 1 & 0.37 & 0.41 & 0.046 & 0.664 \\
+Single expert: dye Curcumin & 1 & 0.43 & 0.46 & 0.031 & 0.635 \\
+Single expert: dye Bis-ANS & 1 & 0.38 & 0.40 & 0.031 & 0.665 \\
+Single expert: dye FSB & 1 & 0.48 & 0.46 & 0.047 & 0.627 \\
+Single expert: seeding & 1 & 0.72 & 0.78 & 0.172 & 0.379 \\
+\bottomrule
+\end{tabular}
+\end{table}
