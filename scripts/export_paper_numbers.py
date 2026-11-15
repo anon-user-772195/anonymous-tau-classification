@@ -121,6 +121,12 @@ def main() -> None:
     if (R / "spectra_preprocessing_sensitivity.csv").exists():
         ps = pd.read_csv(R / "spectra_preprocessing_sensitivity.csv")
         put("prepMax", f(ps.balanced_accuracy.max()), "Preprocessing grid: best single-spectrum balanced accuracy")
+    if (R / "fig7_sensitivity_grid.csv").exists():
+        sg = pd.read_csv(R / "fig7_sensitivity_grid.csv")
+        put("figSevenGridBA", f"{f(sg.balanced_accuracy.min())}--{f(sg.balanced_accuracy.max())}",
+            "Fig 7 sensitivity grid: cell-level balanced accuracy range")
+        put("figSevenGridLib", f"{int(sg.library_calls_correct.max())}",
+            "Fig 7 sensitivity grid: maximum library calls correct (of 3)")
     if (R / "fig7_per_cluster_transfer.csv").exists():
         pcl = pd.read_csv(R / "fig7_per_cluster_transfer.csv")
         put("clusterMax", f(pcl.balanced_accuracy.max()), "Fig 7 per-cluster: max balanced accuracy")
