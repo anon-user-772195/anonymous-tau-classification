@@ -129,5 +129,7 @@
 | AFM + 4 dyes + seeding, N=3: PSP precision | 1.00 |
 | AFM + 4 dyes + seeding, N=3: PSP f1 | 1.00 |
 | Preprocessing grid: best single-spectrum balanced accuracy | 0.47 |
+| Fig 7 sensitivity grid: cell-level balanced accuracy range | 0.33--0.40 |
+| Fig 7 sensitivity grid: maximum library calls correct (of 3) | 1 |
 | Fig 7 per-cluster: max balanced accuracy | 0.45 |
 | Fig 7 per-cluster: number of tests | 12 |
