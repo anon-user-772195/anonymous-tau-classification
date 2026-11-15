@@ -113,6 +113,24 @@ def load_morphology_histograms(workbook: Path = WORKBOOK) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
+def reconstruct_log_particles(centres, counts, rng) -> np.ndarray:
+    """Log particle values drawn uniformly within each published histogram bin.
+
+    The draw removes the per-disease bin grid (which would otherwise identify the class). A bin that
+    straddles zero is truncated to its positive part. An earlier version clipped negative draws to
+    1e-3, which created an artificial point mass that occurred only for PSP area (about 19% of those
+    particles) and leaked the label; see results/v2/AUDIT_LOG.md.
+    """
+    order = np.argsort(centres)
+    c = np.asarray(centres, dtype=float)[order]
+    n = np.asarray(counts, dtype=int)[order]
+    width = np.median(np.diff(c))
+    lo = np.maximum(c - width / 2, 0.0)
+    hi = c + width / 2
+    vals = rng.uniform(np.repeat(lo, n), np.repeat(hi, n))
+    return np.log(np.maximum(vals, 1e-12))   # uniform(0, hi) returns exactly 0 with probability ~0
+
+
 def load_proteolysis(workbook: Path = WORKBOOK) -> pd.DataFrame:
     """Fig 3B time course: label, minutes, dose, value (a single curve per disease)."""
     df = _sheet("Fig 3", workbook)
