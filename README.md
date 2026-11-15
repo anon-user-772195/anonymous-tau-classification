@@ -74,6 +74,7 @@ NeuroFoldNet is a two-level framework for combining assays that were never measu
 | `run_assay_models.py` | Fig. 2 spectra: NeuroFoldNet vs 5 tuned baselines, nested group CV, CIs, permutation tests, preparation-level calls, recombinant-tau out-of-distribution check. Fig. 4 seeding: nested CV, 1,000-permutation test |
 | `run_morphology_models.py` | Fig. 1D AFM: bin-jittered particle reconstruction, KDE expert, preparation-level calls |
 | `run_multiassay_panel.py` | NeuroFoldNet Level 2 fusion vs majority voting, with the full metric panel |
+| `run_fusion_analyses.py` | Fusion rules (product, sum, max, median, vote, learned stacking) on identical held-out preparations; assay ablation; calibration (ECE, reliability) |
 | `run_fig7_cross_genotype.py` | GSE277105: train on one genotype, test on the other; exact null; positive control; sensitivity grid |
 | `run_spectral_preprocessing_sensitivity.py` | 4 preprocessing methods × 4 classifiers; single-spectrum ceiling |
 | `run_assay_statistics.py` | KS, Kruskal–Wallis and Mann–Whitney tests with Holm correction |
@@ -92,6 +93,7 @@ python scripts/build_fig7_sparse.py               # once, about 8 min
 python scripts/run_assay_models.py                # about 2.5 h with permutations (--quick for a smoke test)
 python scripts/run_morphology_models.py
 python scripts/run_multiassay_panel.py            # needs the two scripts above
+python scripts/run_fusion_analyses.py             # about 4 min
 python scripts/run_fig7_cross_genotype.py
 python scripts/run_spectral_preprocessing_sensitivity.py
 python scripts/run_assay_statistics.py
