@@ -181,6 +181,42 @@ def main() -> None:
         [[r.panel, esc(r.timepoint), f"{r.statistic:.2f}", f3(r.effect_size),
           f"{int(r.n_AD)}/{int(r.n_DLB)}/{int(r.n_PSP)}", pfmt(r.p_holm)] for r in om.itertuples()]))
 
+    # S14 fusion rules (split-half)
+    if (R / "fusion_rules_comparison.csv").exists():
+        fr = pd.read_csv(R / "fusion_rules_comparison.csv")
+        rows = []
+        for (panel, n), sub in fr.groupby(["panel", "per_source_N"], sort=False):
+            for i, r in enumerate(sub.to_dict("records")):
+                rows.append([esc(panel) if i == 0 else "", str(n) if i == 0 else "", esc(r["rule"]),
+                             f"{100 * r['accuracy_mean']:.1f} [{100 * r['accuracy_p2.5']:.1f}, {100 * r['accuracy_p97.5']:.1f}]",
+                             f2(r["macro_auc_mean"]), f3(r["log_loss_mean"]), f3(r["ece_mean"])])
+        parts.append(table(
+            "tab:s_rules", "Fusion rules compared on identical held-out preparations (split-half protocol, 100 random splits; "
+            "accuracy in \\%, mean with 2.5--97.5\\% range). The learned fusion is fitted on preparations from one half of the "
+            "held-out measurements and evaluated on the other half.",
+            ["Panel", "$N$", "Rule", "Accuracy", "Macro-AUC", "Log loss", "ECE"], rows, "llp{4.2cm}cccc"))
+    # S15 ablation
+    if (R / "fusion_ablation.csv").exists():
+        ab = pd.read_csv(R / "fusion_ablation.csv")
+        rows = []
+        for n, sub in ab.groupby("per_source_N", sort=False):
+            for i, r in enumerate(sub.itertuples()):
+                rows.append([str(n) if i == 0 else "", esc(r.removed), f"{100 * r.accuracy_mean:.1f}",
+                             f"{100 * r.accuracy_drop:+.1f}", f2(r.macro_auc_mean), f3(r.log_loss_mean)])
+        parts.append(table(
+            "tab:s_ablation", "Ablation of NeuroFoldNet fusion (AFM + 4 dyes + seeding): accuracy (\\%) and accuracy drop "
+            "(percentage points) when one source or one assay family is removed (100 draws).",
+            ["$N$", "Removed", "Accuracy", "Drop", "Macro-AUC", "Log loss"], rows, "llcccc"))
+    # S16 calibration
+    if (R / "fusion_calibration.csv").exists():
+        cal = pd.read_csv(R / "fusion_calibration.csv")
+        parts.append(table(
+            "tab:s_calibration", "Calibration of the fused posterior and of each single expert (one measurement): accuracy, "
+            "mean top-label confidence, expected calibration error (ECE, 10 bins) and Brier score.",
+            ["Setting", "$N$", "Accuracy", "Mean confidence", "ECE", "Brier"],
+            [[esc(r.setting), str(r.per_source_N), f2(r.accuracy), f2(r.mean_confidence), f3(r.ece), f3(r.brier)]
+             for r in cal.itertuples()], "lccccc"))
+
     (R / "supplementary_tables.tex").write_text("\n".join(parts), encoding="utf-8")
     print(f"wrote {len(parts)} tables to {R / 'supplementary_tables.tex'}")
 

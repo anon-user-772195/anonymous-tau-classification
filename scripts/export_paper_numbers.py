@@ -121,6 +121,34 @@ def main() -> None:
     if (R / "spectra_preprocessing_sensitivity.csv").exists():
         ps = pd.read_csv(R / "spectra_preprocessing_sensitivity.csv")
         put("prepMax", f(ps.balanced_accuracy.max()), "Preprocessing grid: best single-spectrum balanced accuracy")
+    if (R / "fusion_rules_comparison.csv").exists():
+        fr = pd.read_csv(R / "fusion_rules_comparison.csv")
+        short = {"Product rule (NeuroFoldNet)": "Product", "Sum rule": "Sum", "Max rule": "Max", "Median rule": "Median",
+                 "Majority vote": "Vote", "Learned fusion (stacked logistic regression)": "Learned"}
+        for panel, pk in [("AFM + 4 dyes + seeding", "All"), ("AFM + 4 dyes", "AFMDyes")]:
+            for n, word in [(1, "One"), (3, "Three")]:
+                sub = fr[(fr.panel == panel) & (fr.per_source_N == n)].set_index("rule")
+                for rule, rk in short.items():
+                    put(f"rule{pk}{rk}{word}", pct(sub.loc[rule, "accuracy_mean"]), f"Split-half {panel}, N={n}: {rule} accuracy")
+                    put(f"rule{pk}{rk}{word}ECE", f(sub.loc[rule, "ece_mean"], 3), f"Split-half {panel}, N={n}: {rule} ECE")
+    if (R / "fusion_ablation.csv").exists():
+        ab = pd.read_csv(R / "fusion_ablation.csv")
+        for n, word in [(1, "One"), (3, "Three")]:
+            sub = ab[ab.per_source_N == n].set_index("removed")
+            for name, key in [("Family: AFM morphology (all 3 measures)", "AFM"), ("Family: Seeding", "Seed"),
+                              ("Family: Dye spectra (all 4 dyes)", "Dyes"), ("dye ThT", "ThT"), ("seeding", "SeedOnly")]:
+                put(f"abl{key}{word}", f"{100 * sub.loc[name, 'accuracy_drop']:.1f}",
+                    f"Ablation N={n}: accuracy drop (pp) when removing {name}")
+            put(f"ablFull{word}", pct(sub.loc["None (full panel)", "accuracy_mean"]), f"Ablation N={n}: full-panel accuracy")
+    if (R / "fusion_calibration.csv").exists():
+        cal = pd.read_csv(R / "fusion_calibration.csv")
+        for setting, key in [("AFM + 4 dyes + seeding", "All"), ("AFM + 4 dyes", "AFMDyes")]:
+            for n, word in [(1, "One"), (3, "Three")]:
+                r = cal[(cal.setting == setting) & (cal.per_source_N == n)].iloc[0]
+                put(f"ece{key}{word}", f(r.ece, 3), f"Calibration {setting}, N={n}: ECE")
+                put(f"conf{key}{word}", pct(r.mean_confidence), f"Calibration {setting}, N={n}: mean confidence")
+        single = cal[cal.setting.str.startswith("Single expert")]
+        put("eceSingle", f"{f(single.ece.min(), 3)}--{f(single.ece.max(), 3)}", "Calibration: single-expert ECE range")
     if (R / "fig7_sensitivity_grid.csv").exists():
         sg = pd.read_csv(R / "fig7_sensitivity_grid.csv")
         put("figSevenGridBA", f"{f(sg.balanced_accuracy.min())}--{f(sg.balanced_accuracy.max())}",
