@@ -217,6 +217,49 @@ def main() -> None:
             [[esc(r.setting), str(r.per_source_N), f2(r.accuracy), f2(r.mean_confidence), f3(r.ece), f3(r.brier)]
              for r in cal.itertuples()], "lccccc"))
 
+    # S17 conformal prediction
+    if (R / "conformal_prediction.csv").exists():
+        cp = pd.read_csv(R / "conformal_prediction.csv")
+        rows = [[esc(r.panel), str(r.per_source_N), f"{1 - r.alpha:.2f}", f"{100 * r.coverage:.1f}",
+                 f"{100 * r.coverage_AD:.0f}/{100 * r.coverage_DLB:.0f}/{100 * r.coverage_PSP:.0f}", f2(r.mean_set_size),
+                 f"{100 * r.singleton_rate:.1f}", "--" if pd.isna(r.singleton_accuracy) else f"{100 * r.singleton_accuracy:.1f}",
+                 f"{100 * r.empty_rate:.1f}"] for r in cp.itertuples()]
+        parts.append(table(
+            "tab:s_conformal", "Class-conditional split conformal prediction on held-out preparations (100 random splits): "
+            "empirical coverage (\\%), per-class coverage AD/DLB/PSP (\\%), mean set size, single-label sets (\\%) and their "
+            "accuracy (\\%), and empty sets (abstentions, \\%).",
+            ["Panel", "$N$", "Target", "Coverage", "Per class", "Set size", "Single", "Single acc.", "Empty"], rows,
+            "lcccccccc"))
+    # S18 out-of-distribution
+    if (R / "novelty_detection.csv").exists():
+        nd = pd.read_csv(R / "novelty_detection.csv")
+        co = pd.read_csv(R / "conformal_ood_rejection.csv")
+        rows = [["Distance-based novelty detection", str(r.spectra_per_dye), f"{r.alpha:.2f}", f"{100 * r.disease_rejected:.1f}",
+                 f"{100 * r.rTauO_rejected:.1f}", f2(r.auc)] for r in nd.itertuples()]
+        rows += [["Classifier conformal (empty set)", str(r.per_source_N), f"{r.alpha:.2f}", f"{100 * r.disease_rejected:.1f}",
+                  f"{100 * r.rTauO_rejected:.1f}", f2(r.ood_auc)] for r in co.itertuples()]
+        parts.append(table(
+            "tab:s_ood_reject", "Rejection of recombinant tau oligomers (rTauO, out of distribution) using the four dye spectra: "
+            "disease preparations wrongly rejected and rTauO preparations rejected (\\%) at significance $\\alpha$, and the "
+            "AUC separating rTauO from disease preparations.",
+            ["Method", "Spectra per dye", "$\\alpha$", "Disease rejected", "rTauO rejected", "AUC"], rows, "lccccc"))
+    # S19 sequential acquisition and temperatures
+    if (R / "sequential_acquisition.csv").exists():
+        sq = pd.read_csv(R / "sequential_acquisition.csv")
+        names = {"voi": "Value of information (raw posteriors)", "voi_calibrated": "Value of information (calibrated experts)",
+                 "fixed": "Fixed order (calibrated)", "random": "Random order (calibrated)"}
+        rows = [[f"{r.threshold:.2f}", names[r.policy], f"{100 * r.accuracy:.1f}", f"{r.mean_measurements:.1f}",
+                 f"{r.median_measurements:g}", f"{100 * r.reached_threshold:.1f}", str(r.n)] for r in sq.itertuples()]
+        parts.append(table(
+            "tab:s_sequential", "Sequential assay selection: one measurement at a time until the fused posterior reaches the "
+            "confidence threshold (at most 3 per AFM measure or dye and 1 seeding replicate).",
+            ["Threshold", "Policy", "Accuracy", "Mean meas.", "Median meas.", "Reached (\\%)", "$n$"], rows, "llccccc"))
+        et = pd.read_csv(R / "expert_temperatures.csv")
+        parts.append(table(
+            "tab:s_temps", "Temperature of each expert fitted by log loss on held-out predictions (mean $\\pm$ SD over splits); "
+            "values above 1 indicate overconfident experts.",
+            ["Expert", "Temperature"], [[esc(r.expert), f"{r.mean:.2f} $\\pm$ {r.std:.2f}"] for r in et.itertuples()], "lc"))
+
     (R / "supplementary_tables.tex").write_text("\n".join(parts), encoding="utf-8")
     print(f"wrote {len(parts)} tables to {R / 'supplementary_tables.tex'}")
 

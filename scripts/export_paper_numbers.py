@@ -151,6 +151,44 @@ def main() -> None:
                 put(f"conf{key}{word}", pct(r.mean_confidence), f"Calibration {setting}, N={n}: mean confidence")
         single = cal[cal.setting.str.startswith("Single expert")]
         put("eceSingle", f"{f(single.ece.min(), 3)}--{f(single.ece.max(), 3)}", "Calibration: single-expert ECE range")
+    if (R / "conformal_prediction.csv").exists():
+        cp = pd.read_csv(R / "conformal_prediction.csv")
+        for panel, pk in [("AFM + 4 dyes + seeding", "All"), ("AFM + 4 dyes", "AFMDyes"), ("4-dye spectra", "Dyes")]:
+            for n, word in [(1, "One"), (3, "Three")]:
+                for alpha, ak in [(0.10, "Ninety"), (0.05, "NinetyFive")]:
+                    r = cp[(cp.panel == panel) & (cp.per_source_N == n) & (cp.alpha.round(2) == alpha)].iloc[0]
+                    base = f"cp{pk}{word}{ak}"
+                    put(base + "Cov", pct(r.coverage), f"Conformal {panel}, N={n}, alpha={alpha}: coverage")
+                    put(base + "Single", pct(r.singleton_rate), f"Conformal {panel}, N={n}, alpha={alpha}: singleton rate")
+                    put(base + "SingleAcc", pct(r.singleton_accuracy), f"Conformal {panel}, N={n}, alpha={alpha}: singleton accuracy")
+                    put(base + "Size", f(r.mean_set_size), f"Conformal {panel}, N={n}, alpha={alpha}: mean set size")
+                    put(base + "Empty", pct(r.empty_rate), f"Conformal {panel}, N={n}, alpha={alpha}: empty-set rate")
+        lo, hi = cp.coverage.min(), cp.coverage.max()
+        put("cpCovRange", f"{pct(lo)}--{pct(hi)}", "Conformal: range of empirical coverage across settings")
+    if (R / "conformal_ood_rejection.csv").exists():
+        co = pd.read_csv(R / "conformal_ood_rejection.csv")
+        put("oodClfAUC", f"{f(co.ood_auc.min())}--{f(co.ood_auc.max())}", "Classifier-based conformal OOD AUC range")
+        put("oodClfRej", pct(co.rTauO_rejected.max()), "Classifier-based conformal: max rTauO rejection")
+    if (R / "novelty_detection.csv").exists():
+        nd = pd.read_csv(R / "novelty_detection.csv")
+        for n, word in [(1, "One"), (3, "Three"), (5, "Five")]:
+            s = nd[nd.spectra_per_dye == n]
+            put(f"novAUC{word}", f(s.auc.iloc[0]), f"Novelty detection AUC, {n} spectra per dye")
+            r = s[s.alpha.round(2) == 0.10].iloc[0]
+            put(f"novRej{word}", pct(r.rTauO_rejected), f"Novelty detection, {n} spectra/dye, alpha 0.10: rTauO rejected")
+            put(f"novFalse{word}", pct(r.disease_rejected), f"Novelty detection, {n} spectra/dye, alpha 0.10: disease rejected")
+    if (R / "sequential_acquisition.csv").exists():
+        sq = pd.read_csv(R / "sequential_acquisition.csv")
+        for tau, tk in [(0.90, "Ninety"), (0.95, "NinetyFive")]:
+            for policy, pk in [("voi", "VOI"), ("voi_calibrated", "VOICal"), ("fixed", "Fixed"), ("random", "Random")]:
+                r = sq[(sq.threshold.round(2) == tau) & (sq.policy == policy)].iloc[0]
+                put(f"seq{pk}{tk}Acc", pct(r.accuracy), f"Sequential {policy}, threshold {tau}: accuracy")
+                put(f"seq{pk}{tk}N", f(r.mean_measurements, 1), f"Sequential {policy}, threshold {tau}: mean measurements")
+                put(f"seq{pk}{tk}Med", f"{r.median_measurements:g}", f"Sequential {policy}, threshold {tau}: median measurements")
+    if (R / "expert_temperatures.csv").exists():
+        et = pd.read_csv(R / "expert_temperatures.csv").set_index("expert")
+        for k, key in [("dye ThT", "ThT"), ("dye Bis-ANS", "BisANS"), ("seeding", "Seed"), ("AFM height", "Height")]:
+            put(f"temp{key}", f(et.loc[k, "mean"]), f"Fitted temperature of expert {k}")
     if (R / "fig7_sensitivity_grid.csv").exists():
         sg = pd.read_csv(R / "fig7_sensitivity_grid.csv")
         put("figSevenGridBA", f"{f(sg.balanced_accuracy.min())}--{f(sg.balanced_accuracy.max())}",
