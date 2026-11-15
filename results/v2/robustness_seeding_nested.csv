@@ -1,0 +1,8 @@
+analysis,metric,mean,sd
+family_selected_in_inner_cv,accuracy,0.6694444444444444,0.1174714652977236
+family_selected_in_inner_cv,balanced_accuracy,0.6694444444444443,0.11747146529772363
+family_selected_in_inner_cv,macro_auc_ovr,0.8145833333333334,0.06911838658795807
+family_selected_in_inner_cv,log_loss,0.9143659387732237,0.31931524286749474
+inner_choice_frequency,LogisticRegression,0.8833333333333333,
+inner_choice_frequency,LinearDiscriminantAnalysis,0.11666666666666667,
+permutation_p,balanced_accuracy,0.26073926073926074,

@@ -250,36 +250,36 @@ FSB & 44 & 0.49 & 0.46 & 0.36 & 0.09 & 0.55 \\
 \toprule
 \textbf{Panel} & \textbf{$N$} & \textbf{Fusion} & \textbf{Majority vote} & \textbf{Difference} \\
 \midrule
-AFM morphology (3 measures) & 1 & 80.4 & 74.6 & +5.8 \\
- & 2 & 94.4 & 87.3 & +7.1 \\
- & 3 & 98.4 & 92.3 & +6.0 \\
- & 5 & 99.8 & 96.5 & +3.3 \\
- & 10 & 100.0 & 99.2 & +0.8 \\
+AFM morphology (3 measures) & 1 & 79.8 & 73.8 & +6.0 \\
+ & 2 & 93.7 & 87.9 & +5.8 \\
+ & 3 & 98.0 & 92.5 & +5.5 \\
+ & 5 & 99.8 & 96.0 & +3.8 \\
+ & 10 & 100.0 & 98.4 & +1.6 \\
 4-dye spectra & 1 & 51.7 & 48.6 & +3.1 \\
  & 2 & 57.9 & 54.6 & +3.3 \\
  & 3 & 62.7 & 58.4 & +4.3 \\
  & 5 & 69.1 & 64.0 & +5.1 \\
  & 10 & 79.3 & 72.1 & +7.2 \\
-AFM morphology (3 measures) + seeding & 1 & 92.8 & 84.0 & +8.8 \\
- & 2 & 97.8 & 92.8 & +5.0 \\
- & 3 & 99.1 & 95.8 & +3.3 \\
- & 5 & 99.8 & 98.0 & +1.9 \\
- & 10 & 100.0 & 99.6 & +0.4 \\
+AFM morphology (3 measures) + seeding & 1 & 92.4 & 83.5 & +8.9 \\
+ & 2 & 97.6 & 92.6 & +5.0 \\
+ & 3 & 99.0 & 95.8 & +3.2 \\
+ & 5 & 99.7 & 98.1 & +1.6 \\
+ & 10 & 100.0 & 99.3 & +0.7 \\
 4-dye spectra + seeding & 1 & 74.5 & 66.2 & +8.2 \\
  & 2 & 76.2 & 70.7 & +5.5 \\
  & 3 & 76.6 & 72.3 & +4.4 \\
  & 5 & 77.1 & 75.1 & +2.0 \\
  & 10 & 78.2 & 79.3 & -1.1 \\
-AFM + 4 dyes & 1 & 84.0 & 69.9 & +14.0 \\
- & 2 & 95.5 & 83.6 & +11.9 \\
- & 3 & 98.6 & 89.6 & +9.0 \\
- & 5 & 99.9 & 94.6 & +5.3 \\
- & 10 & 100.0 & 98.2 & +1.8 \\
-AFM + 4 dyes + seeding & 1 & 93.7 & 80.4 & +13.3 \\
- & 2 & 97.7 & 88.7 & +9.0 \\
- & 3 & 99.3 & 92.9 & +6.4 \\
- & 5 & 99.9 & 96.4 & +3.4 \\
- & 10 & 100.0 & 98.7 & +1.3 \\
+AFM + 4 dyes & 1 & 83.4 & 69.4 & +14.0 \\
+ & 2 & 95.2 & 83.3 & +11.8 \\
+ & 3 & 98.5 & 89.2 & +9.2 \\
+ & 5 & 99.8 & 94.3 & +5.6 \\
+ & 10 & 100.0 & 98.0 & +2.0 \\
+AFM + 4 dyes + seeding & 1 & 93.8 & 80.0 & +13.8 \\
+ & 2 & 97.6 & 88.6 & +9.0 \\
+ & 3 & 99.2 & 92.8 & +6.4 \\
+ & 5 & 99.8 & 96.1 & +3.7 \\
+ & 10 & 100.0 & 98.6 & +1.4 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -329,30 +329,30 @@ Positive control & -- & MAPT$\to$C57 & 0.71 & 0.82 & -- \\
 \toprule
 \textbf{Panel} & \textbf{$N$} & \textbf{Rule} & \textbf{Accuracy} & \textbf{Macro-AUC} & \textbf{Log loss} & \textbf{ECE} \\
 \midrule
-AFM + 4 dyes + seeding & 1 & Product rule (NeuroFoldNet) & 92.1 [77.8, 100.0] & 0.99 & 0.165 & 0.085 \\
- &  & Sum rule & 89.7 [66.7, 100.0] & 0.98 & 0.824 & 0.464 \\
- &  & Max rule & 77.6 [55.6, 100.0] & 0.92 & 0.850 & 0.363 \\
- &  & Median rule & 79.8 [55.6, 100.0] & 0.93 & 0.909 & 0.404 \\
- &  & Majority vote & 81.2 [55.6, 100.0] & 0.93 & 0.768 & 0.328 \\
- &  & Learned fusion (stacked logistic regression) & 84.6 [66.7, 100.0] & 0.97 & 0.475 & 0.148 \\
-AFM + 4 dyes + seeding & 3 & Product rule (NeuroFoldNet) & 98.4 [88.9, 100.0] & 1.00 & 0.045 & 0.035 \\
- &  & Sum rule & 94.8 [77.8, 100.0] & 0.99 & 0.819 & 0.515 \\
- &  & Max rule & 80.4 [55.6, 100.0] & 0.94 & 0.798 & 0.365 \\
- &  & Median rule & 91.0 [71.9, 100.0] & 0.98 & 0.935 & 0.514 \\
- &  & Majority vote & 91.7 [77.8, 100.0] & 0.99 & 0.600 & 0.350 \\
- &  & Learned fusion (stacked logistic regression) & 94.0 [77.8, 100.0] & 1.00 & 0.135 & 0.073 \\
-AFM + 4 dyes & 1 & Product rule (NeuroFoldNet) & 83.7 [78.4, 88.2] & 0.96 & 0.380 & 0.042 \\
- &  & Sum rule & 82.7 [77.7, 87.5] & 0.94 & 0.902 & 0.410 \\
- &  & Max rule & 73.5 [68.2, 80.2] & 0.89 & 0.926 & 0.320 \\
- &  & Median rule & 70.7 [65.9, 76.4] & 0.87 & 0.960 & 0.305 \\
- &  & Majority vote & 69.9 [64.3, 75.2] & 0.88 & 0.849 & 0.188 \\
- &  & Learned fusion (stacked logistic regression) & 84.2 [79.1, 89.1] & 0.96 & 0.376 & 0.044 \\
-AFM + 4 dyes & 3 & Product rule (NeuroFoldNet) & 98.6 [95.1, 100.0] & 1.00 & 0.104 & 0.076 \\
- &  & Sum rule & 97.4 [93.1, 100.0] & 1.00 & 0.896 & 0.564 \\
- &  & Max rule & 91.3 [84.7, 97.2] & 0.98 & 0.873 & 0.490 \\
- &  & Median rule & 87.2 [79.8, 93.1] & 0.97 & 0.966 & 0.488 \\
- &  & Majority vote & 89.9 [83.3, 95.2] & 0.98 & 0.630 & 0.329 \\
- &  & Learned fusion (stacked logistic regression) & 98.6 [95.8, 100.0] & 1.00 & 0.045 & 0.023 \\
+AFM + 4 dyes + seeding & 1 & Product rule (NeuroFoldNet) & 92.7 [77.8, 100.0] & 0.99 & 0.168 & 0.085 \\
+ &  & Sum rule & 89.2 [66.7, 100.0] & 0.98 & 0.831 & 0.465 \\
+ &  & Max rule & 76.7 [55.6, 100.0] & 0.91 & 0.861 & 0.351 \\
+ &  & Median rule & 80.4 [55.6, 100.0] & 0.94 & 0.906 & 0.405 \\
+ &  & Majority vote & 79.2 [55.6, 100.0] & 0.92 & 0.775 & 0.314 \\
+ &  & Learned fusion (stacked logistic regression) & 84.3 [66.7, 100.0] & 0.97 & 0.479 & 0.148 \\
+AFM + 4 dyes + seeding & 3 & Product rule (NeuroFoldNet) & 98.1 [88.9, 100.0] & 1.00 & 0.050 & 0.037 \\
+ &  & Sum rule & 94.3 [77.8, 100.0] & 0.99 & 0.826 & 0.513 \\
+ &  & Max rule & 80.2 [55.6, 100.0] & 0.94 & 0.804 & 0.370 \\
+ &  & Median rule & 92.0 [77.8, 100.0] & 0.98 & 0.941 & 0.527 \\
+ &  & Majority vote & 91.8 [71.9, 100.0] & 0.99 & 0.605 & 0.356 \\
+ &  & Learned fusion (stacked logistic regression) & 93.3 [71.9, 100.0] & 1.00 & 0.150 & 0.075 \\
+AFM + 4 dyes & 1 & Product rule (NeuroFoldNet) & 83.2 [78.2, 87.3] & 0.95 & 0.389 & 0.045 \\
+ &  & Sum rule & 82.5 [77.9, 87.3] & 0.94 & 0.909 & 0.411 \\
+ &  & Max rule & 71.6 [65.9, 77.5] & 0.89 & 0.941 & 0.306 \\
+ &  & Median rule & 71.1 [67.3, 76.8] & 0.87 & 0.954 & 0.308 \\
+ &  & Majority vote & 69.6 [64.1, 75.5] & 0.88 & 0.848 & 0.185 \\
+ &  & Learned fusion (stacked logistic regression) & 83.4 [77.7, 87.8] & 0.95 & 0.389 & 0.048 \\
+AFM + 4 dyes & 3 & Product rule (NeuroFoldNet) & 98.4 [94.4, 100.0] & 1.00 & 0.119 & 0.087 \\
+ &  & Sum rule & 97.5 [93.1, 100.0] & 1.00 & 0.904 & 0.568 \\
+ &  & Max rule & 90.8 [85.4, 96.6] & 0.98 & 0.882 & 0.489 \\
+ &  & Median rule & 87.2 [79.8, 93.1] & 0.96 & 0.970 & 0.489 \\
+ &  & Majority vote & 89.2 [82.6, 94.4] & 0.98 & 0.638 & 0.325 \\
+ &  & Learned fusion (stacked logistic regression) & 98.2 [94.4, 100.0] & 1.00 & 0.054 & 0.026 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -364,30 +364,30 @@ AFM + 4 dyes & 3 & Product rule (NeuroFoldNet) & 98.6 [95.1, 100.0] & 1.00 & 0.1
 \toprule
 \textbf{$N$} & \textbf{Removed} & \textbf{Accuracy} & \textbf{Drop} & \textbf{Macro-AUC} & \textbf{Log loss} \\
 \midrule
-1 & None (full panel) & 93.9 & +0.0 & 0.99 & 0.145 \\
- & AFM height & 91.4 & +2.6 & 0.99 & 0.203 \\
- & AFM area & 89.6 & +4.4 & 0.98 & 0.234 \\
- & AFM diameter & 88.5 & +5.4 & 0.98 & 0.259 \\
- & dye ThT & 94.8 & -0.8 & 0.99 & 0.135 \\
- & dye Curcumin & 93.1 & +0.8 & 0.99 & 0.165 \\
- & dye Bis-ANS & 93.6 & +0.4 & 0.99 & 0.156 \\
- & dye FSB & 93.3 & +0.6 & 0.99 & 0.149 \\
- & seeding & 83.9 & +10.0 & 0.96 & 0.377 \\
- & Family: AFM morphology (all 3 measures) & 74.8 & +19.1 & 0.92 & 0.484 \\
- & Family: Dye spectra (all 4 dyes) & 93.6 & +0.3 & 0.99 & 0.143 \\
- & Family: Seeding & 84.2 & +9.8 & 0.96 & 0.371 \\
-3 & None (full panel) & 99.4 & +0.0 & 1.00 & 0.037 \\
- & AFM height & 98.8 & +0.6 & 1.00 & 0.056 \\
- & AFM area & 97.3 & +2.2 & 1.00 & 0.090 \\
- & AFM diameter & 94.7 & +4.7 & 1.00 & 0.128 \\
- & dye ThT & 99.3 & +0.2 & 1.00 & 0.040 \\
- & dye Curcumin & 99.1 & +0.4 & 1.00 & 0.044 \\
- & dye Bis-ANS & 99.2 & +0.3 & 1.00 & 0.042 \\
- & dye FSB & 98.8 & +0.6 & 1.00 & 0.040 \\
- & seeding & 98.6 & +0.8 & 1.00 & 0.107 \\
- & Family: AFM morphology (all 3 measures) & 77.6 & +21.8 & 0.92 & 0.457 \\
- & Family: Dye spectra (all 4 dyes) & 98.9 & +0.5 & 1.00 & 0.051 \\
- & Family: Seeding & 98.8 & +0.7 & 1.00 & 0.103 \\
+1 & None (full panel) & 93.8 & +0.0 & 0.99 & 0.143 \\
+ & AFM height & 92.0 & +1.8 & 0.99 & 0.198 \\
+ & AFM area & 89.6 & +4.2 & 0.98 & 0.234 \\
+ & AFM diameter & 88.9 & +4.8 & 0.98 & 0.257 \\
+ & dye ThT & 94.4 & -0.7 & 0.99 & 0.138 \\
+ & dye Curcumin & 93.2 & +0.6 & 0.99 & 0.164 \\
+ & dye Bis-ANS & 93.3 & +0.5 & 0.99 & 0.160 \\
+ & dye FSB & 93.1 & +0.7 & 0.99 & 0.149 \\
+ & seeding & 83.5 & +10.3 & 0.95 & 0.387 \\
+ & Family: AFM morphology (all 3 measures) & 74.8 & +18.9 & 0.92 & 0.484 \\
+ & Family: Dye spectra (all 4 dyes) & 93.2 & +0.6 & 0.99 & 0.143 \\
+ & Family: Seeding & 83.9 & +9.9 & 0.96 & 0.382 \\
+3 & None (full panel) & 99.3 & +0.0 & 1.00 & 0.040 \\
+ & AFM height & 98.8 & +0.6 & 1.00 & 0.060 \\
+ & AFM area & 97.3 & +2.1 & 1.00 & 0.090 \\
+ & AFM diameter & 94.6 & +4.7 & 0.99 & 0.140 \\
+ & dye ThT & 99.3 & +0.1 & 1.00 & 0.044 \\
+ & dye Curcumin & 98.8 & +0.5 & 1.00 & 0.048 \\
+ & dye Bis-ANS & 98.9 & +0.4 & 1.00 & 0.047 \\
+ & dye FSB & 99.0 & +0.3 & 1.00 & 0.043 \\
+ & seeding & 98.5 & +0.8 & 1.00 & 0.121 \\
+ & Family: AFM morphology (all 3 measures) & 77.6 & +21.7 & 0.92 & 0.457 \\
+ & Family: Dye spectra (all 4 dyes) & 99.0 & +0.3 & 1.00 & 0.053 \\
+ & Family: Seeding & 98.6 & +0.8 & 1.00 & 0.117 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -399,12 +399,12 @@ AFM + 4 dyes & 3 & Product rule (NeuroFoldNet) & 98.6 [95.1, 100.0] & 1.00 & 0.1
 \toprule
 \textbf{Setting} & \textbf{$N$} & \textbf{Accuracy} & \textbf{Mean confidence} & \textbf{ECE} & \textbf{Brier} \\
 \midrule
-AFM + 4 dyes + seeding & 1 & 0.93 & 0.94 & 0.014 & 0.102 \\
-AFM + 4 dyes + seeding & 3 & 0.99 & 0.97 & 0.024 & 0.018 \\
-AFM + 4 dyes & 1 & 0.84 & 0.83 & 0.007 & 0.227 \\
-AFM + 4 dyes & 3 & 0.99 & 0.91 & 0.074 & 0.042 \\
+AFM + 4 dyes + seeding & 1 & 0.93 & 0.94 & 0.015 & 0.103 \\
+AFM + 4 dyes + seeding & 3 & 0.99 & 0.97 & 0.025 & 0.020 \\
+AFM + 4 dyes & 1 & 0.83 & 0.82 & 0.016 & 0.236 \\
+AFM + 4 dyes & 3 & 0.98 & 0.90 & 0.083 & 0.048 \\
 Single expert: AFM height & 1 & 0.63 & 0.61 & 0.057 & 0.482 \\
-Single expert: AFM area & 1 & 0.52 & 0.58 & 0.068 & 0.536 \\
+Single expert: AFM area & 1 & 0.56 & 0.55 & 0.050 & 0.539 \\
 Single expert: AFM diameter & 1 & 0.57 & 0.56 & 0.090 & 0.533 \\
 Single expert: dye ThT & 1 & 0.37 & 0.41 & 0.046 & 0.664 \\
 Single expert: dye Curcumin & 1 & 0.43 & 0.46 & 0.031 & 0.635 \\
@@ -422,14 +422,14 @@ Single expert: seeding & 1 & 0.72 & 0.78 & 0.172 & 0.379 \\
 \toprule
 \textbf{Panel} & \textbf{$N$} & \textbf{Target} & \textbf{Coverage} & \textbf{Per class} & \textbf{Set size} & \textbf{Single} & \textbf{Single acc.} & \textbf{Empty} \\
 \midrule
-AFM + 4 dyes + seeding & 1 & 0.90 & 86.6 & 87/84/89 & 0.92 & 91.0 & 94.5 & 8.4 \\
-AFM + 4 dyes + seeding & 1 & 0.95 & 91.2 & 93/89/92 & 1.02 & 92.2 & 93.8 & 2.9 \\
-AFM + 4 dyes + seeding & 3 & 0.90 & 87.6 & 87/85/91 & 0.88 & 87.6 & 100.0 & 12.4 \\
-AFM + 4 dyes + seeding & 3 & 0.95 & 92.4 & 92/90/96 & 0.92 & 92.4 & 100.0 & 7.6 \\
-AFM + 4 dyes & 1 & 0.90 & 89.8 & 90/89/90 & 1.16 & 83.8 & 88.2 & 0.0 \\
-AFM + 4 dyes & 1 & 0.95 & 95.0 & 95/95/95 & 1.38 & 63.4 & 93.2 & 0.0 \\
-AFM + 4 dyes & 3 & 0.90 & 90.3 & 91/90/90 & 0.90 & 90.4 & 99.9 & 9.6 \\
-AFM + 4 dyes & 3 & 0.95 & 95.1 & 95/95/95 & 0.95 & 95.4 & 99.7 & 4.6 \\
+AFM + 4 dyes + seeding & 1 & 0.90 & 86.1 & 87/84/87 & 0.92 & 91.1 & 94.1 & 8.6 \\
+AFM + 4 dyes + seeding & 1 & 0.95 & 91.9 & 93/90/93 & 1.03 & 92.8 & 93.8 & 2.2 \\
+AFM + 4 dyes + seeding & 3 & 0.90 & 87.2 & 87/85/90 & 0.87 & 87.2 & 100.0 & 12.8 \\
+AFM + 4 dyes + seeding & 3 & 0.95 & 92.2 & 92/90/95 & 0.92 & 92.3 & 99.9 & 7.7 \\
+AFM + 4 dyes & 1 & 0.90 & 89.8 & 90/89/90 & 1.17 & 82.7 & 88.2 & 0.0 \\
+AFM + 4 dyes & 1 & 0.95 & 95.0 & 95/95/95 & 1.39 & 62.4 & 93.2 & 0.0 \\
+AFM + 4 dyes & 3 & 0.90 & 90.1 & 90/90/90 & 0.90 & 90.2 & 99.9 & 9.8 \\
+AFM + 4 dyes & 3 & 0.95 & 95.2 & 95/95/96 & 0.96 & 95.5 & 99.7 & 4.5 \\
 4-dye spectra & 1 & 0.90 & 89.6 & 90/89/90 & 2.35 & 9.5 & 70.8 & 0.0 \\
 4-dye spectra & 1 & 0.95 & 94.7 & 95/95/95 & 2.62 & 4.0 & 76.0 & 0.0 \\
 4-dye spectra & 3 & 0.90 & 89.3 & 90/89/89 & 1.95 & 20.4 & 81.8 & 0.0 \\
@@ -466,14 +466,14 @@ Classifier conformal (empty set) & 3 & 0.05 & 0.0 & 0.0 & 0.45 \\
 \toprule
 \textbf{Threshold} & \textbf{Policy} & \textbf{Accuracy} & \textbf{Mean meas.} & \textbf{Median meas.} & \textbf{Reached (\%)} & \textbf{$n$} \\
 \midrule
-0.90 & Value of information (raw posteriors) & 90.7 & 3.5 & 2 & 95.3 & 150 \\
-0.90 & Value of information (calibrated experts) & 94.0 & 3.9 & 2 & 94.0 & 150 \\
-0.90 & Fixed order (calibrated) & 93.3 & 6.9 & 7 & 94.7 & 150 \\
-0.90 & Random order (calibrated) & 94.7 & 8.6 & 6.5 & 94.7 & 150 \\
-0.95 & Value of information (raw posteriors) & 98.0 & 4.9 & 2 & 90.0 & 150 \\
-0.95 & Value of information (calibrated experts) & 95.3 & 5.4 & 3 & 87.3 & 150 \\
-0.95 & Fixed order (calibrated) & 97.3 & 8.9 & 8 & 89.3 & 150 \\
-0.95 & Random order (calibrated) & 97.3 & 11.1 & 9 & 82.7 & 150 \\
+0.90 & Value of information (raw posteriors) & 90.0 & 3.5 & 2 & 96.0 & 150 \\
+0.90 & Value of information (calibrated experts) & 94.7 & 3.6 & 2 & 94.7 & 150 \\
+0.90 & Fixed order (calibrated) & 93.3 & 6.7 & 7 & 96.0 & 150 \\
+0.90 & Random order (calibrated) & 94.7 & 8.6 & 7 & 94.7 & 150 \\
+0.95 & Value of information (raw posteriors) & 98.0 & 5.0 & 2 & 88.7 & 150 \\
+0.95 & Value of information (calibrated experts) & 96.7 & 4.7 & 2.5 & 91.3 & 150 \\
+0.95 & Fixed order (calibrated) & 97.3 & 8.4 & 8 & 92.0 & 150 \\
+0.95 & Random order (calibrated) & 96.7 & 10.9 & 9 & 86.0 & 150 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -486,7 +486,7 @@ Classifier conformal (empty set) & 3 & 0.05 & 0.0 & 0.0 & 0.45 \\
 \textbf{Expert} & \textbf{Temperature} \\
 \midrule
 AFM height & 0.96 $\pm$ 0.05 \\
-AFM area & 1.26 $\pm$ 0.07 \\
+AFM area & 0.93 $\pm$ 0.05 \\
 AFM diameter & 1.04 $\pm$ 0.06 \\
 dye ThT & 2.25 $\pm$ 1.26 \\
 dye Curcumin & 1.15 $\pm$ 0.19 \\
