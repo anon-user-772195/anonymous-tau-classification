@@ -200,6 +200,106 @@
 | Calibration AFM + 4 dyes, N=3: ECE | 0.074 |
 | Calibration AFM + 4 dyes, N=3: mean confidence | 91.3\% |
 | Calibration: single-expert ECE range | 0.031--0.172 |
+| Conformal AFM + 4 dyes + seeding, N=1, alpha=0.1: coverage | 86.6\% |
+| Conformal AFM + 4 dyes + seeding, N=1, alpha=0.1: singleton rate | 91.0\% |
+| Conformal AFM + 4 dyes + seeding, N=1, alpha=0.1: singleton accuracy | 94.5\% |
+| Conformal AFM + 4 dyes + seeding, N=1, alpha=0.1: mean set size | 0.92 |
+| Conformal AFM + 4 dyes + seeding, N=1, alpha=0.1: empty-set rate | 8.4\% |
+| Conformal AFM + 4 dyes + seeding, N=1, alpha=0.05: coverage | 91.2\% |
+| Conformal AFM + 4 dyes + seeding, N=1, alpha=0.05: singleton rate | 92.2\% |
+| Conformal AFM + 4 dyes + seeding, N=1, alpha=0.05: singleton accuracy | 93.8\% |
+| Conformal AFM + 4 dyes + seeding, N=1, alpha=0.05: mean set size | 1.02 |
+| Conformal AFM + 4 dyes + seeding, N=1, alpha=0.05: empty-set rate | 2.9\% |
+| Conformal AFM + 4 dyes + seeding, N=3, alpha=0.1: coverage | 87.6\% |
+| Conformal AFM + 4 dyes + seeding, N=3, alpha=0.1: singleton rate | 87.6\% |
+| Conformal AFM + 4 dyes + seeding, N=3, alpha=0.1: singleton accuracy | 100.0\% |
+| Conformal AFM + 4 dyes + seeding, N=3, alpha=0.1: mean set size | 0.88 |
+| Conformal AFM + 4 dyes + seeding, N=3, alpha=0.1: empty-set rate | 12.4\% |
+| Conformal AFM + 4 dyes + seeding, N=3, alpha=0.05: coverage | 92.4\% |
+| Conformal AFM + 4 dyes + seeding, N=3, alpha=0.05: singleton rate | 92.4\% |
+| Conformal AFM + 4 dyes + seeding, N=3, alpha=0.05: singleton accuracy | 100.0\% |
+| Conformal AFM + 4 dyes + seeding, N=3, alpha=0.05: mean set size | 0.92 |
+| Conformal AFM + 4 dyes + seeding, N=3, alpha=0.05: empty-set rate | 7.6\% |
+| Conformal AFM + 4 dyes, N=1, alpha=0.1: coverage | 89.8\% |
+| Conformal AFM + 4 dyes, N=1, alpha=0.1: singleton rate | 83.8\% |
+| Conformal AFM + 4 dyes, N=1, alpha=0.1: singleton accuracy | 88.2\% |
+| Conformal AFM + 4 dyes, N=1, alpha=0.1: mean set size | 1.16 |
+| Conformal AFM + 4 dyes, N=1, alpha=0.1: empty-set rate | 0.0\% |
+| Conformal AFM + 4 dyes, N=1, alpha=0.05: coverage | 95.0\% |
+| Conformal AFM + 4 dyes, N=1, alpha=0.05: singleton rate | 63.4\% |
+| Conformal AFM + 4 dyes, N=1, alpha=0.05: singleton accuracy | 93.2\% |
+| Conformal AFM + 4 dyes, N=1, alpha=0.05: mean set size | 1.38 |
+| Conformal AFM + 4 dyes, N=1, alpha=0.05: empty-set rate | 0.0\% |
+| Conformal AFM + 4 dyes, N=3, alpha=0.1: coverage | 90.3\% |
+| Conformal AFM + 4 dyes, N=3, alpha=0.1: singleton rate | 90.4\% |
+| Conformal AFM + 4 dyes, N=3, alpha=0.1: singleton accuracy | 99.9\% |
+| Conformal AFM + 4 dyes, N=3, alpha=0.1: mean set size | 0.90 |
+| Conformal AFM + 4 dyes, N=3, alpha=0.1: empty-set rate | 9.6\% |
+| Conformal AFM + 4 dyes, N=3, alpha=0.05: coverage | 95.1\% |
+| Conformal AFM + 4 dyes, N=3, alpha=0.05: singleton rate | 95.4\% |
+| Conformal AFM + 4 dyes, N=3, alpha=0.05: singleton accuracy | 99.7\% |
+| Conformal AFM + 4 dyes, N=3, alpha=0.05: mean set size | 0.95 |
+| Conformal AFM + 4 dyes, N=3, alpha=0.05: empty-set rate | 4.6\% |
+| Conformal 4-dye spectra, N=1, alpha=0.1: coverage | 89.6\% |
+| Conformal 4-dye spectra, N=1, alpha=0.1: singleton rate | 9.5\% |
+| Conformal 4-dye spectra, N=1, alpha=0.1: singleton accuracy | 70.8\% |
+| Conformal 4-dye spectra, N=1, alpha=0.1: mean set size | 2.35 |
+| Conformal 4-dye spectra, N=1, alpha=0.1: empty-set rate | 0.0\% |
+| Conformal 4-dye spectra, N=1, alpha=0.05: coverage | 94.7\% |
+| Conformal 4-dye spectra, N=1, alpha=0.05: singleton rate | 4.0\% |
+| Conformal 4-dye spectra, N=1, alpha=0.05: singleton accuracy | 76.0\% |
+| Conformal 4-dye spectra, N=1, alpha=0.05: mean set size | 2.62 |
+| Conformal 4-dye spectra, N=1, alpha=0.05: empty-set rate | 0.0\% |
+| Conformal 4-dye spectra, N=3, alpha=0.1: coverage | 89.3\% |
+| Conformal 4-dye spectra, N=3, alpha=0.1: singleton rate | 20.4\% |
+| Conformal 4-dye spectra, N=3, alpha=0.1: singleton accuracy | 81.8\% |
+| Conformal 4-dye spectra, N=3, alpha=0.1: mean set size | 1.95 |
+| Conformal 4-dye spectra, N=3, alpha=0.1: empty-set rate | 0.0\% |
+| Conformal 4-dye spectra, N=3, alpha=0.05: coverage | 94.2\% |
+| Conformal 4-dye spectra, N=3, alpha=0.05: singleton rate | 9.3\% |
+| Conformal 4-dye spectra, N=3, alpha=0.05: singleton accuracy | 87.0\% |
+| Conformal 4-dye spectra, N=3, alpha=0.05: mean set size | 2.26 |
+| Conformal 4-dye spectra, N=3, alpha=0.05: empty-set rate | 0.0\% |
+| Conformal: range of empirical coverage across settings | 86.6\%--95.1\% |
+| Classifier-based conformal OOD AUC range | 0.45--0.47 |
+| Classifier-based conformal: max rTauO rejection | 0.0\% |
+| Novelty detection AUC, 1 spectra per dye | 0.65 |
+| Novelty detection, 1 spectra/dye, alpha 0.10: rTauO rejected | 28.3\% |
+| Novelty detection, 1 spectra/dye, alpha 0.10: disease rejected | 10.2\% |
+| Novelty detection AUC, 3 spectra per dye | 0.75 |
+| Novelty detection, 3 spectra/dye, alpha 0.10: rTauO rejected | 37.4\% |
+| Novelty detection, 3 spectra/dye, alpha 0.10: disease rejected | 8.5\% |
+| Novelty detection AUC, 5 spectra per dye | 0.80 |
+| Novelty detection, 5 spectra/dye, alpha 0.10: rTauO rejected | 40.5\% |
+| Novelty detection, 5 spectra/dye, alpha 0.10: disease rejected | 9.5\% |
+| Sequential voi, threshold 0.9: accuracy | 90.7\% |
+| Sequential voi, threshold 0.9: mean measurements | 3.5 |
+| Sequential voi, threshold 0.9: median measurements | 2 |
+| Sequential voi_calibrated, threshold 0.9: accuracy | 94.0\% |
+| Sequential voi_calibrated, threshold 0.9: mean measurements | 3.9 |
+| Sequential voi_calibrated, threshold 0.9: median measurements | 2 |
+| Sequential fixed, threshold 0.9: accuracy | 93.3\% |
+| Sequential fixed, threshold 0.9: mean measurements | 6.9 |
+| Sequential fixed, threshold 0.9: median measurements | 7 |
+| Sequential random, threshold 0.9: accuracy | 94.7\% |
+| Sequential random, threshold 0.9: mean measurements | 8.6 |
+| Sequential random, threshold 0.9: median measurements | 6.5 |
+| Sequential voi, threshold 0.95: accuracy | 98.0\% |
+| Sequential voi, threshold 0.95: mean measurements | 4.9 |
+| Sequential voi, threshold 0.95: median measurements | 2 |
+| Sequential voi_calibrated, threshold 0.95: accuracy | 95.3\% |
+| Sequential voi_calibrated, threshold 0.95: mean measurements | 5.4 |
+| Sequential voi_calibrated, threshold 0.95: median measurements | 3 |
+| Sequential fixed, threshold 0.95: accuracy | 97.3\% |
+| Sequential fixed, threshold 0.95: mean measurements | 8.9 |
+| Sequential fixed, threshold 0.95: median measurements | 8 |
+| Sequential random, threshold 0.95: accuracy | 97.3\% |
+| Sequential random, threshold 0.95: mean measurements | 11.1 |
+| Sequential random, threshold 0.95: median measurements | 9 |
+| Fitted temperature of expert dye ThT | 2.25 |
+| Fitted temperature of expert dye Bis-ANS | 2.08 |
+| Fitted temperature of expert seeding | 1.49 |
+| Fitted temperature of expert AFM height | 0.96 |
 | Fig 7 sensitivity grid: cell-level balanced accuracy range | 0.33--0.40 |
 | Fig 7 sensitivity grid: maximum library calls correct (of 3) | 1 |
 | Fig 7 per-cluster: max balanced accuracy | 0.45 |

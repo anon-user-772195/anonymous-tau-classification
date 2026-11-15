@@ -414,3 +414,85 @@ Single expert: seeding & 1 & 0.72 & 0.78 & 0.172 & 0.379 \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\begin{table}[!htbp]
+\centering\scriptsize
+\caption{Class-conditional split conformal prediction on held-out preparations (100 random splits): empirical coverage (\%), per-class coverage AD/DLB/PSP (\%), mean set size, single-label sets (\%) and their accuracy (\%), and empty sets (abstentions, \%).}\label{tab:s_conformal}
+\begin{tabular}{lcccccccc}
+\toprule
+\textbf{Panel} & \textbf{$N$} & \textbf{Target} & \textbf{Coverage} & \textbf{Per class} & \textbf{Set size} & \textbf{Single} & \textbf{Single acc.} & \textbf{Empty} \\
+\midrule
+AFM + 4 dyes + seeding & 1 & 0.90 & 86.6 & 87/84/89 & 0.92 & 91.0 & 94.5 & 8.4 \\
+AFM + 4 dyes + seeding & 1 & 0.95 & 91.2 & 93/89/92 & 1.02 & 92.2 & 93.8 & 2.9 \\
+AFM + 4 dyes + seeding & 3 & 0.90 & 87.6 & 87/85/91 & 0.88 & 87.6 & 100.0 & 12.4 \\
+AFM + 4 dyes + seeding & 3 & 0.95 & 92.4 & 92/90/96 & 0.92 & 92.4 & 100.0 & 7.6 \\
+AFM + 4 dyes & 1 & 0.90 & 89.8 & 90/89/90 & 1.16 & 83.8 & 88.2 & 0.0 \\
+AFM + 4 dyes & 1 & 0.95 & 95.0 & 95/95/95 & 1.38 & 63.4 & 93.2 & 0.0 \\
+AFM + 4 dyes & 3 & 0.90 & 90.3 & 91/90/90 & 0.90 & 90.4 & 99.9 & 9.6 \\
+AFM + 4 dyes & 3 & 0.95 & 95.1 & 95/95/95 & 0.95 & 95.4 & 99.7 & 4.6 \\
+4-dye spectra & 1 & 0.90 & 89.6 & 90/89/90 & 2.35 & 9.5 & 70.8 & 0.0 \\
+4-dye spectra & 1 & 0.95 & 94.7 & 95/95/95 & 2.62 & 4.0 & 76.0 & 0.0 \\
+4-dye spectra & 3 & 0.90 & 89.3 & 90/89/89 & 1.95 & 20.4 & 81.8 & 0.0 \\
+4-dye spectra & 3 & 0.95 & 94.2 & 95/95/93 & 2.26 & 9.3 & 87.0 & 0.0 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!htbp]
+\centering\scriptsize
+\caption{Rejection of recombinant tau oligomers (rTauO, out of distribution) using the four dye spectra: disease preparations wrongly rejected and rTauO preparations rejected (\%) at significance $\alpha$, and the AUC separating rTauO from disease preparations.}\label{tab:s_ood_reject}
+\begin{tabular}{lccccc}
+\toprule
+\textbf{Method} & \textbf{Spectra per dye} & \textbf{$\alpha$} & \textbf{Disease rejected} & \textbf{rTauO rejected} & \textbf{AUC} \\
+\midrule
+Distance-based novelty detection & 1 & 0.10 & 10.2 & 28.3 & 0.65 \\
+Distance-based novelty detection & 1 & 0.05 & 4.8 & 19.4 & 0.65 \\
+Distance-based novelty detection & 3 & 0.10 & 8.5 & 37.4 & 0.75 \\
+Distance-based novelty detection & 3 & 0.05 & 3.1 & 11.5 & 0.75 \\
+Distance-based novelty detection & 5 & 0.10 & 9.5 & 40.5 & 0.80 \\
+Distance-based novelty detection & 5 & 0.05 & 5.4 & 17.4 & 0.80 \\
+Classifier conformal (empty set) & 1 & 0.10 & 0.0 & 0.0 & 0.47 \\
+Classifier conformal (empty set) & 1 & 0.05 & 0.0 & 0.0 & 0.47 \\
+Classifier conformal (empty set) & 3 & 0.10 & 0.0 & 0.0 & 0.45 \\
+Classifier conformal (empty set) & 3 & 0.05 & 0.0 & 0.0 & 0.45 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!htbp]
+\centering\scriptsize
+\caption{Sequential assay selection: one measurement at a time until the fused posterior reaches the confidence threshold (at most 3 per AFM measure or dye and 1 seeding replicate).}\label{tab:s_sequential}
+\begin{tabular}{llccccc}
+\toprule
+\textbf{Threshold} & \textbf{Policy} & \textbf{Accuracy} & \textbf{Mean meas.} & \textbf{Median meas.} & \textbf{Reached (\%)} & \textbf{$n$} \\
+\midrule
+0.90 & Value of information (raw posteriors) & 90.7 & 3.5 & 2 & 95.3 & 150 \\
+0.90 & Value of information (calibrated experts) & 94.0 & 3.9 & 2 & 94.0 & 150 \\
+0.90 & Fixed order (calibrated) & 93.3 & 6.9 & 7 & 94.7 & 150 \\
+0.90 & Random order (calibrated) & 94.7 & 8.6 & 6.5 & 94.7 & 150 \\
+0.95 & Value of information (raw posteriors) & 98.0 & 4.9 & 2 & 90.0 & 150 \\
+0.95 & Value of information (calibrated experts) & 95.3 & 5.4 & 3 & 87.3 & 150 \\
+0.95 & Fixed order (calibrated) & 97.3 & 8.9 & 8 & 89.3 & 150 \\
+0.95 & Random order (calibrated) & 97.3 & 11.1 & 9 & 82.7 & 150 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\begin{table}[!htbp]
+\centering\scriptsize
+\caption{Temperature of each expert fitted by log loss on held-out predictions (mean $\pm$ SD over splits); values above 1 indicate overconfident experts.}\label{tab:s_temps}
+\begin{tabular}{lc}
+\toprule
+\textbf{Expert} & \textbf{Temperature} \\
+\midrule
+AFM height & 0.96 $\pm$ 0.05 \\
+AFM area & 1.26 $\pm$ 0.07 \\
+AFM diameter & 1.04 $\pm$ 0.06 \\
+dye ThT & 2.25 $\pm$ 1.26 \\
+dye Curcumin & 1.15 $\pm$ 0.19 \\
+dye Bis-ANS & 2.08 $\pm$ 1.21 \\
+dye FSB & 1.07 $\pm$ 0.19 \\
+seeding & 1.49 $\pm$ 0.64 \\
+\bottomrule
+\end{tabular}
+\end{table}
