@@ -183,12 +183,14 @@
 | Ablation N=1: accuracy drop (pp) when removing dye ThT | -0.8 |
 | Ablation N=1: accuracy drop (pp) when removing seeding | 10.0 |
 | Ablation N=1: full-panel accuracy | 93.9\% |
+| Ablation N=1: accuracy gain (pp) when removing ThT | 0.8 |
 | Ablation N=3: accuracy drop (pp) when removing Family: AFM morphology (all 3 measures) | 21.8 |
 | Ablation N=3: accuracy drop (pp) when removing Family: Seeding | 0.7 |
 | Ablation N=3: accuracy drop (pp) when removing Family: Dye spectra (all 4 dyes) | 0.5 |
 | Ablation N=3: accuracy drop (pp) when removing dye ThT | 0.2 |
 | Ablation N=3: accuracy drop (pp) when removing seeding | 0.8 |
 | Ablation N=3: full-panel accuracy | 99.4\% |
+| Ablation N=3: accuracy gain (pp) when removing ThT | -0.2 |
 | Calibration AFM + 4 dyes + seeding, N=1: ECE | 0.014 |
 | Calibration AFM + 4 dyes + seeding, N=1: mean confidence | 94.4\% |
 | Calibration AFM + 4 dyes + seeding, N=3: ECE | 0.024 |
