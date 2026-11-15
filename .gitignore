@@ -1,0 +1,15 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.ipynb_checkpoints/
+
+# Node / Next.js build output (never commit)
+node_modules/
+.next/
+out/
+
+# Large local data: download from GEO (see data/README.md)
+data/figure7_geo/
