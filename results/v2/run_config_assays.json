@@ -1,0 +1,7 @@
+{
+  "repeats": 5,
+  "n_perm": 200,
+  "n_boot": 2000,
+  "quick": false,
+  "skip_seeding": false
+}

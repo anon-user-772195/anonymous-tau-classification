@@ -1,0 +1,11 @@
+feature_type,source,diseases,what_is_available,usable_for_external_test,reason
+AFM morphology,"Lasagna-Reeves et al. 2012, Sci Rep 2:700",AD,"Summary (most oligomers 4-8 nm diameter)",no,"No per-particle values; different isolation and AFM protocol"
+AFM morphology,"Dasari et al. 2025 (cryo-EM of brain-derived tau oligomers), PMC12335351",AD (1 donor),"Height range 2-8 nm in a figure; micrographs on request",no,"No numeric distribution released"
+AFM morphology,"Amplified BDTO osmolyte study 2025, PMC12333032",AD (1 donor),"Control aBDTO height 3.75 +/- 0.86 nm, diameter 25.8 +/- 3.0 nm (n=195)",no,"Summary statistics only; heights ~3x those in Lo Cascio Fig 1D, indicating protocol-dependent scale"
+AFM morphology,"Marcatti et al. 2025, Alzheimers Dement, PMC12359067",AD vs NDAN,"Fold change relative to AD only",no,"No absolute values; non-amplified BDTOs"
+AFM morphology,"IR-AMES study 2026, PMC13015324",AD,"Heights 5-8 nm, lateral ~40 nm (text)",no,"Summary only; different method"
+Dye spectra,"Yang et al. 2023, PNAS (EMBER); Dryad doi:10.7272/Q6G73BZN",AD and Pick's tau; in vitro fibrils,"Raw in vitro fibril spectra; code",no,"No DLB/PSP; different dyes, excitation-emission imaging of tissue rather than oligomer spectra"
+Dye spectra,"Amplified BDTO osmolyte study 2025, PMC12333032",AD,"ThT and Bis-ANS overlay plots (relative)",no,"Figures only; no per-spectrum values"
+Seeding,"Puangmalai et al. 2020, Cell Death Dis 11:314",AD/PSP/DLB,"Biosensor FRET seeding, mean +/- SEM",no,"No per-sample values; different readout from TOMA/T22 ELISA"
+Seeding,"Marcatti et al. 2025",AD vs NDAN,"Biosensor seeding, T22 blocking",no,"No per-sample values; different readout"
+Neuron transcriptomics,"GEO query '(tau oligomer* OR tau oligomers) AND gse[ETYP]' (18 series, searched 2026-11-14)",various,"18 series",no,"Only GSE277105 (the study analysed here) treats neurons with AD/PSP/DLB patient tau; GSE89189 is microglia with tau of unspecified disease source"

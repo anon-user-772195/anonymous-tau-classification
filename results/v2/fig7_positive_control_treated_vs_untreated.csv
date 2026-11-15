@@ -1,0 +1,3 @@
+task,train_genotype,test_genotype,n_test_cells,balanced_accuracy,auc
+treated_vs_untreated,C57,MAPT,8147,0.5267038380999379,0.765753087892641
+treated_vs_untreated,MAPT,C57,20000,0.7078111086578734,0.8183246574915579

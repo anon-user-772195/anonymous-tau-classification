@@ -1,0 +1,31 @@
+Legacy table: tau_plus_one_fig7_nonleaking_feature.csv  shape=(18, 16)
+
+1. Fig 1 morphology
+   Workbook Fig 1D col 0 header='height', next col header='count' (histogram).
+   AD height bin centres rows 3-7: [0.996, 1.03, 1.064, 1.099, 1.133]
+   Legacy AD height values:        [0.996, 1.03, 1.064, 1.099, 1.133]
+   Fig 1E (modal values) repeats one number per disease: AD diameter rows 3-6 = [2.204, 2.204, 2.204, 2.204]
+   Legacy diameter unique values by class: {'AD': [np.float64(2.204)], 'DLB': [np.float64(4.391)], 'PSP': [np.float64(2.214)]}
+
+2. Fig 3 proteolysis
+   Workbook Fig 3 col 0 rows 3-6 (time, min): [0, 1, 5, 15]
+   Legacy AD proteo_resist_05 rep0-3: [1.047, 83.333, 91.43, 41.805]  == the AD time course at 0/1/5/15 min
+
+3. Fig 4 seeding
+   Workbook Fig 4 rows 2-6 col 0 (antibodies): ['TOMA1', 'TOMA2', 'TOMA3', 'TOMA4', 'T22']
+   Workbook AD replicate column 1, rows 3-6: [0.23, 0.115667, 0.038667, 0.339]
+   Legacy AD seed_density rep0-3:            [0.23, 0.115667, 0.038667, 0.339]
+   -> TOMA2, TOMA3, TOMA4, T22 of one replicate were treated as four replicates.
+
+4. Cross-figure join
+   legacy/neurofoldnet/tau_data.py assigns replicate = groupby('disease').cumcount() in each figure
+   and outer-merges on (disease, replicate): row k of Fig 1 is glued to row k of Figs 3/4/5.
+   Values imputed with a pooled median appear in all classes: ['AD_tau_rep4', 'DLB_tau_rep4', 'PSP_tau_rep4', 'PSP_tau_rep5', 'PSP_tau_rep6', 'PSP_tau_rep7']
+
+5. Figure 7 feature
+   unique values: [0.064872292103914]  (n_unique=1) -> constant, removed by VarianceThreshold;
+   it cannot carry information and cannot have 14% feature importance.
+
+6. Label leakage
+   Lookup rule 'diameter -> disease' classifies 100% of legacy rows correctly with no learning.
+   The legacy 95% therefore reflects class-constant columns, not tau-polymorph signal.

@@ -1,0 +1,7 @@
+label,dose,auc_0_15min,peak_value,peak_minutes,note
+AD,0.5ug/mL,1057.891,91.43,5.0,"single curve per disease; descriptive only, no inferential test possible"
+AD,1.0ug/mL,368.6385,39.792,1.0,"single curve per disease; descriptive only, no inferential test possible"
+DLB,0.5ug/mL,196.48450000000003,30.958,1.0,"single curve per disease; descriptive only, no inferential test possible"
+DLB,1.0ug/mL,121.2715,18.828,1.0,"single curve per disease; descriptive only, no inferential test possible"
+PSP,0.5ug/mL,360.04549999999995,47.666,1.0,"single curve per disease; descriptive only, no inferential test possible"
+PSP,1.0ug/mL,176.813,27.229,1.0,"single curve per disease; descriptive only, no inferential test possible"

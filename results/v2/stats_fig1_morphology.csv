@@ -1,0 +1,10 @@
+measure,comparison,n_a,n_b,median_a,median_b,ks_D,p_value,p_holm,note
+area,AD vs DLB,525,562,17.516,117.103,0.5050330452465683,1.4420999506227182e-63,5.768399802490873e-63,particle values reconstructed at histogram-bin resolution; particles are not independent patients
+area,AD vs PSP,525,963,17.516,3.85,0.41904761904761906,4.616920488776207e-54,1.385076146632862e-53,particle values reconstructed at histogram-bin resolution; particles are not independent patients
+area,DLB vs PSP,562,963,117.103,3.85,0.6863966770508827,1.4626539441393544e-160,1.0238577608975481e-159,particle values reconstructed at histogram-bin resolution; particles are not independent patients
+diameter,AD vs DLB,526,572,4.48,12.523,0.5104496264192082,1.3155353867547043e-65,6.577676933773522e-65,particle values reconstructed at histogram-bin resolution; particles are not independent patients
+diameter,AD vs PSP,526,966,4.48,2.214,0.41825095057034223,5.768006545496181e-54,1.385076146632862e-53,particle values reconstructed at histogram-bin resolution; particles are not independent patients
+diameter,DLB vs PSP,572,966,12.523,2.214,0.7080745341614907,2.962037301888509e-174,2.369629841510807e-173,particle values reconstructed at histogram-bin resolution; particles are not independent patients
+height,AD vs DLB,490,572,1.27,1.124,0.40384615384615385,5.0669211843438124e-39,5.0669211843438124e-39,particle values reconstructed at histogram-bin resolution; particles are not independent patients
+height,AD vs PSP,490,966,1.27,0.706,0.7598343685300207,1.1168063820512529e-185,1.0051257438461276e-184,particle values reconstructed at histogram-bin resolution; particles are not independent patients
+height,DLB vs PSP,572,966,1.124,0.706,0.4715320910973085,7.791206525086504e-73,4.674723915051902e-72,particle values reconstructed at histogram-bin resolution; particles are not independent patients

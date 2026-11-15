@@ -1,0 +1,25 @@
+panel,timepoint,test,comparison,statistic,effect_size,effect,p_value,n_AD,n_DLB,n_PSP,median_AD,median_DLB,median_PSP,p_holm,correction
+5E,12hr,Kruskal-Wallis,AD/DLB/PSP,8.083333333333337,0.4679487179487183,epsilon_squared,0.01756816772229192,5.0,6.0,5.0,11.0,4.0,13.0,0.07027267088916768,Holm across 6 omnibus tests
+5E,12hr,Mann-Whitney U,AD vs DLB,25.0,-0.6666666666666667,rank_biserial,0.07794691458872482,,,,,,,0.15589382917744965,Holm within panel/timepoint (post hoc)
+5E,12hr,Mann-Whitney U,AD vs PSP,9.0,0.28,rank_biserial,0.5283593272709488,,,,,,,0.5283593272709488,Holm within panel/timepoint (post hoc)
+5E,12hr,Mann-Whitney U,DLB vs PSP,0.0,1.0,rank_biserial,0.007546234490451711,,,,,,,0.02263870347135513,Holm within panel/timepoint (post hoc)
+5E,24hr,Kruskal-Wallis,AD/DLB/PSP,10.659033989266549,0.7215861657722124,epsilon_squared,0.004846410289199344,5.0,5.0,5.0,41.0,9.0,21.0,0.029078461735196064,Holm across 6 omnibus tests
+5E,24hr,Mann-Whitney U,AD vs DLB,25.0,-1.0,rank_biserial,0.007936507936507936,,,,,,,0.023809523809523808,Holm within panel/timepoint (post hoc)
+5E,24hr,Mann-Whitney U,AD vs PSP,22.0,-0.76,rank_biserial,0.059327060946523506,,,,,,,0.059327060946523506,Holm within panel/timepoint (post hoc)
+5E,24hr,Mann-Whitney U,DLB vs PSP,1.0,0.92,rank_biserial,0.021176657854316622,,,,,,,0.042353315708633245,Holm within panel/timepoint (post hoc)
+5F,12hr,Kruskal-Wallis,AD/DLB/PSP,0.2575792914469882,-0.012184760199671412,epsilon_squared,0.8791588809263617,78.0,22.0,46.0,1.311,1.475,1.3135,0.8791588809263617,Holm across 6 omnibus tests
+5F,12hr,Mann-Whitney U,AD vs DLB,797.0,0.07109557109557108,rank_biserial,0.6061194275191889,,,,,,,1.0,Holm within panel/timepoint (post hoc)
+5F,12hr,Mann-Whitney U,AD vs PSP,1756.0,0.021181716833890696,rank_biserial,0.842418656791999,,,,,,,1.0,Holm within panel/timepoint (post hoc)
+5F,12hr,Mann-Whitney U,DLB vs PSP,527.5,-0.04249011857707519,rank_biserial,0.7798598683041048,,,,,,,1.0,Holm within panel/timepoint (post hoc)
+5F,24hr,Kruskal-Wallis,AD/DLB/PSP,8.747618579910867,0.020385554622087212,epsilon_squared,0.012603139997061062,192.0,42.0,100.0,1.275,1.5505,1.1989999999999998,0.0630156999853053,Holm across 6 omnibus tests
+5F,24hr,Mann-Whitney U,AD vs DLB,3181.0,0.2110615079365079,rank_biserial,0.02900559282438125,,,,,,,0.0580111856487625,Holm within panel/timepoint (post hoc)
+5F,24hr,Mann-Whitney U,AD vs PSP,10450.5,-0.08859375000000003,rank_biserial,0.19996274527902524,,,,,,,0.19996274527902524,Holm within panel/timepoint (post hoc)
+5F,24hr,Mann-Whitney U,DLB vs PSP,2763.5,-0.315952380952381,rank_biserial,0.002433794464707821,,,,,,,0.007301383394123463,Holm within panel/timepoint (post hoc)
+5G,12hr,Kruskal-Wallis,AD/DLB/PSP,5.156770602599132,0.022075318899294632,epsilon_squared,0.0758964550428142,78.0,22.0,46.0,1.0,0.72,1.0,0.1517929100856284,Holm across 6 omnibus tests
+5G,12hr,Mann-Whitney U,AD vs DLB,989.0,-0.15268065268065278,rank_biserial,0.2513472165080014,,,,,,,0.37241233752544955,Holm within panel/timepoint (post hoc)
+5G,12hr,Mann-Whitney U,AD vs PSP,1558.0,0.13154960981047936,rank_biserial,0.18620616876272478,,,,,,,0.37241233752544955,Holm within panel/timepoint (post hoc)
+5G,12hr,Mann-Whitney U,DLB vs PSP,331.0,0.3458498023715415,rank_biserial,0.015071175761446913,,,,,,,0.04521352728434074,Holm within panel/timepoint (post hoc)
+5G,24hr,Kruskal-Wallis,AD/DLB/PSP,7.35272843762078,0.016171385007917767,epsilon_squared,0.025314846964955645,192.0,42.0,100.0,1.0,0.7635000000000001,1.0,0.07594454089486694,Holm across 6 omnibus tests
+5G,24hr,Mann-Whitney U,AD vs DLB,4902.5,-0.21589781746031744,rank_biserial,0.019478336707386162,,,,,,,0.038956673414772325,Holm within panel/timepoint (post hoc)
+5G,24hr,Mann-Whitney U,AD vs PSP,9107.5,0.051302083333333304,rank_biserial,0.4326157634964396,,,,,,,0.4326157634964396,Holm within panel/timepoint (post hoc)
+5G,24hr,Mann-Whitney U,DLB vs PSP,1559.0,0.25761904761904764,rank_biserial,0.009347521663778663,,,,,,,0.02804256499133599,Holm within panel/timepoint (post hoc)

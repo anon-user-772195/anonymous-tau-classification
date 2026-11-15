@@ -1,0 +1,31 @@
+{
+  "observed_mean_balanced_accuracy": 0.34245420461912446,
+  "exact_p_value_36_assignments": 0.2777777777777778,
+  "per_direction_p": {
+    "C57": 0.3333333333333333,
+    "MAPT": 0.6666666666666666
+  },
+  "n_hvg": 2000,
+  "n_pcs": 50,
+  "positive_control": [
+    {
+      "task": "treated_vs_untreated",
+      "train_genotype": "C57",
+      "test_genotype": "MAPT",
+      "n_test_cells": 8147,
+      "balanced_accuracy": 0.5267038380999379,
+      "auc": 0.765753087892641
+    },
+    {
+      "task": "treated_vs_untreated",
+      "train_genotype": "MAPT",
+      "test_genotype": "C57",
+      "n_test_cells": 20000,
+      "balanced_accuracy": 0.7078111086578734,
+      "auc": 0.8183246574915579
+    }
+  ],
+  "concordance_mean_diagonal": -0.10338263291720828,
+  "concordance_exact_p_6_assignments": 0.8333333333333334,
+  "concordance_n_genes": 3054
+}
