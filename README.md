@@ -75,6 +75,7 @@ NeuroFoldNet is a two-level framework for combining assays that were never measu
 | `run_morphology_models.py` | Fig. 1D AFM: bin-jittered particle reconstruction, KDE expert, preparation-level calls |
 | `run_multiassay_panel.py` | NeuroFoldNet Level 2 fusion vs majority voting, with the full metric panel |
 | `run_fusion_analyses.py` | Fusion rules (product, sum, max, median, vote, learned stacking) on identical held-out preparations; assay ablation; calibration (ECE, reliability) |
+| `run_decision_support.py` | Conformal prediction sets with abstention, distance-based novelty detection of recombinant oligomers, temperature calibration and value-of-information sequential assay selection |
 | `run_fig7_cross_genotype.py` | GSE277105: train on one genotype, test on the other; exact null; positive control; sensitivity grid |
 | `run_spectral_preprocessing_sensitivity.py` | 4 preprocessing methods × 4 classifiers; single-spectrum ceiling |
 | `run_assay_statistics.py` | KS, Kruskal–Wallis and Mann–Whitney tests with Holm correction |
@@ -94,6 +95,7 @@ python scripts/run_assay_models.py                # about 2.5 h with permutation
 python scripts/run_morphology_models.py
 python scripts/run_multiassay_panel.py            # needs the two scripts above
 python scripts/run_fusion_analyses.py             # about 4 min
+python scripts/run_decision_support.py            # about 7 min
 python scripts/run_fig7_cross_genotype.py
 python scripts/run_spectral_preprocessing_sensitivity.py
 python scripts/run_assay_statistics.py
