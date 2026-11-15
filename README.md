@@ -79,6 +79,7 @@ NeuroFoldNet is a two-level framework for combining assays that were never measu
 | `run_assay_statistics.py` | KS, Kruskal–Wallis and Mann–Whitney tests with Holm correction |
 | `audit_legacy_pipeline.py` | Shows why the earlier pipeline's accuracy was a leakage artefact |
 | `export_paper_numbers.py` | Writes every manuscript number to `results/v2/paper_numbers.{md,tex}` |
+| `export_supplementary_tables.py` | Writes every Supplementary Table to `results/v2/supplementary_tables.tex` |
 | `neurofoldnet_external.py` | Applies the frozen model to new data (external validation) |
 | `build_fig7_sparse.py` | One-time conversion of the GSE277105 counts to a sparse matrix |
 
@@ -120,6 +121,16 @@ To regenerate the frozen model from the source data, run `python scripts/neurofo
 * There is no independent external cohort. The held-out genotype is a held-out biological context, not an
   external patient cohort.
 * Fig. 1, 3, 5 and 6 are released as histograms, curves or summary statistics.
+
+## Web demo
+
+`UI design/` holds an earlier interface prototype. It is **not part of the manuscript** and uses the earlier,
+leakage-affected model. See the notice in its README.
+
+## License
+
+MIT (see `LICENSE`). Results were produced with Python 3.14.1 and the exact package versions in
+`requirements.txt`.
 
 ## Legacy
 
