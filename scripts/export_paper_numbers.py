@@ -140,6 +140,8 @@ def main() -> None:
                 put(f"abl{key}{word}", f"{100 * sub.loc[name, 'accuracy_drop']:.1f}",
                     f"Ablation N={n}: accuracy drop (pp) when removing {name}")
             put(f"ablFull{word}", pct(sub.loc["None (full panel)", "accuracy_mean"]), f"Ablation N={n}: full-panel accuracy")
+            put(f"ablThTGain{word}", f"{-100 * sub.loc['dye ThT', 'accuracy_drop']:.1f}",
+                f"Ablation N={n}: accuracy gain (pp) when removing ThT")
     if (R / "fusion_calibration.csv").exists():
         cal = pd.read_csv(R / "fusion_calibration.csv")
         for setting, key in [("AFM + 4 dyes + seeding", "All"), ("AFM + 4 dyes", "AFMDyes")]:
