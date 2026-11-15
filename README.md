@@ -79,6 +79,10 @@ NeuroFoldNet is a two-level framework for combining assays that were never measu
 | `run_fig7_cross_genotype.py` | GSE277105: train on one genotype, test on the other; exact null; positive control; sensitivity grid |
 | `run_spectral_preprocessing_sensitivity.py` | 4 preprocessing methods × 4 classifiers; single-spectrum ceiling |
 | `run_assay_statistics.py` | KS, Kruskal–Wallis and Mann–Whitney tests with Holm correction |
+| `run_robustness_checks.py` | Audit: seeding model family selected inside the inner CV, acquisition-drift (exchangeability) test, spectral block-size sensitivity, effect of the seeding expert on fusion |
+| `export_robustness_numbers.py` | Writes the audit results to `results/v2/robustness_numbers.tex` |
+| `run_all.py` | Runs every step in dependency order with logs |
+| `audit_manuscript_numbers.py` | Lists literal (non-macro) numbers in a manuscript file for hand tracing |
 | `audit_legacy_pipeline.py` | Shows why the earlier pipeline's accuracy was a leakage artefact |
 | `export_paper_numbers.py` | Writes every manuscript number to `results/v2/paper_numbers.{md,tex}` |
 | `export_supplementary_tables.py` | Writes every Supplementary Table to `results/v2/supplementary_tables.tex` |
@@ -99,11 +103,23 @@ python scripts/run_decision_support.py            # about 7 min
 python scripts/run_fig7_cross_genotype.py
 python scripts/run_spectral_preprocessing_sensitivity.py
 python scripts/run_assay_statistics.py
+python scripts/run_robustness_checks.py           # pre-submission audit checks (see results/v2/AUDIT_LOG.md)
+python scripts/export_robustness_numbers.py
 python scripts/export_paper_numbers.py
 python scripts/audit_legacy_pipeline.py
 ```
 
-Seeds are fixed throughout.
+Or run everything in dependency order, with per-step logs in `results/v2/logs/`, then the tests:
+
+```bash
+python scripts/run_all.py
+pip install pytest==9.0.1 && python -m pytest -q tests     # 15 leakage/correctness invariants
+```
+
+Seeds are fixed throughout. `REPRODUCIBILITY.md` documents the environment, seeds, split definitions,
+output map and a TRIPOD+AI mapping. `results/v2/AUDIT_LOG.md` records the pre-submission audit: a
+reconstruction bug that was found by the tests and fixed, the post hoc choice of the seeding model with
+its nested alternative, within-preparation acquisition drift, and sensitivity to the spectral block size.
 
 ## External validation with the frozen model
 
