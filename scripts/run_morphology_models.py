@@ -43,12 +43,7 @@ BAG_SIZES = [1, 5, 10, 20, 30]
 def reconstruct(h: pd.DataFrame, rng) -> dict[tuple[str, str], np.ndarray]:
     out = {}
     for (label, measure), s in h.groupby(["label", "measure"]):
-        s = s.sort_values("bin_centre")
-        c = s["bin_centre"].to_numpy()
-        n = s["count"].to_numpy()
-        width = np.median(np.diff(c))
-        vals = np.repeat(c, n) + rng.uniform(-width / 2, width / 2, n.sum())
-        out[(label, measure)] = np.log(np.clip(vals, 1e-3, None))
+        out[(label, measure)] = A.reconstruct_log_particles(s["bin_centre"].to_numpy(), s["count"].to_numpy(), rng)
     return out
 
 

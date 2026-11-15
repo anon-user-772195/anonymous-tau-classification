@@ -51,10 +51,7 @@ def freeze() -> None:
     h = A.load_morphology_histograms()
     rng = np.random.default_rng(100)
     for (label, measure), sub in h.groupby(["label", "measure"]):
-        sub = sub.sort_values("bin_centre")
-        c, n = sub["bin_centre"].to_numpy(), sub["count"].to_numpy()
-        width = np.median(np.diff(c))
-        vals = np.log(np.clip(np.repeat(c, n) + rng.uniform(-width / 2, width / 2, n.sum()), 1e-3, None))
+        vals = A.reconstruct_log_particles(sub["bin_centre"].to_numpy(), sub["count"].to_numpy(), rng)
         bundle["morphology"].setdefault(measure, {})[label] = gaussian_kde(vals)
     pd.DataFrame(columns=["preparation_id", "measure", "value"]).to_csv(MODELS / "templates" / "morphology.csv",
                                                                         index=False)
