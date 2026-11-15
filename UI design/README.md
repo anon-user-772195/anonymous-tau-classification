@@ -1,5 +1,11 @@
 # NeuroFoldNet Inference Console
 
+> **Outdated demo, not part of the manuscript.** This interface was built for an earlier version of the
+> project. Its figures (`public/`) and the Flask backend model come from the earlier pipeline, whose
+> accuracy was a leakage artefact (see `legacy/` and `scripts/audit_legacy_pipeline.py`). The interface
+> outputs are simulated. For the analyses reported in the manuscript, use the code in the repository root
+> and the frozen model in `models/`.
+
 A single-page, client-side interface for running simulated NeuroFoldNet inference and reviewing offline evaluation details.
 
 ## How to Run
